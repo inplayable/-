@@ -77,10 +77,19 @@ http://callback.flatmobi.com/aff/click?app_id=1000&offer_id=22&gaid=4716d154-723
 
 ## 5. Postback 参数说明
 
-Offer 激活之后，可以向 postback 地址发送一次请求，postback 时除了会带上第3部分点击里的所有参数外还会会传入以下参数：
+Offer 激活之后，可以向 postback 地址发送一次请求，postback 时除了会带上第4部分点击里的所有参数外还会会传入以下参数：
 
 | 数据名称 | 参数说明 |
 | -------- | -------- |
+| ClickID |  |
+| InstallTimeStamp |  |
+| BlockedReason |  |
+| BlockedSubReason |  |
+| BlockedReasonValue |  |
+| EventName |  |
+| EventRevenue |  |
+| EventTime |  |
+| EventValue |  |
 | payout | Offer 收益，货币为美金 |
 
 Postback 示例 ：
