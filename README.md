@@ -5,7 +5,9 @@
 ## 1. 查询 offer
 
 请求地址：
-```http://callback.flatmobi.com/offer/getoffer```
+```bash
+http://callback.flatmobi.com/offer/getoffer
+```
 
 每次请求 offer 时，可以配置以下参数：
 
