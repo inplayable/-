@@ -1,7 +1,11 @@
-# 系统下游对接文档v3.1
+# Iplayable网盟平台下游对接文档
+## 1. 概要
+本API文档包括线上调用Iplayable网盟平台Offer List的API方法，响应实例以及跟踪回掉参数的配置信息
+
 ## 1. 查询 offer
 
-请求地址： `http://callback.flatmobi.com/offer/getoffer`
+请求地址：
+```http://callback.flatmobi.com/offer/getoffer```
 
 每次请求 offer 时，可以配置以下参数：
 
