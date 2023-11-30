@@ -6,7 +6,7 @@
 
 请求地址：
 ```bash
-http://callback.flatmobi.com/offer/getoffer
+http://47.90.165.0/api/v1/getoffer
 ```
 
 
@@ -23,7 +23,7 @@ http://callback.flatmobi.com/offer/getoffer
 
 查询 offer API 调用示例（测试的 API，接入的正式 API 需要申请 app_id 和 app_key）:
 ```bash
-http://callback.flatmobi.com/offer/getoffer?app_id=1000&app_key=098f6bcd4621d373cade4e832627b4f6&countries=ID&paltform=android&price_type=CPI
+http://47.90.165.0/api/v1/getoffer?app_id=1000&app_key=098f6bcd4621d373cade4e832627b4f6&countries=ID&paltform=android&price_type=CPI
 ```
 
 
@@ -87,27 +87,25 @@ http://callback.flatmobi.com/offer/getoffer?app_id=1000&app_key=098f6bcd4621d373
 
 | 字段名称 | 参数说明 |
 | -------- | -------- |
-| id | Offer 唯一标识 |
 | app_name |  名称 |
 | app_pkg | 包名 |
 | click_url | Offer 跳转链接 |
-| daily_cap | Offer 每日预算限制，激活数不能超过这个值 |
 | countries | 国家 |
-| isincent | 激励类型，1=激励 offer、0=非激励 offer |
-| des | offer 描述信息 |
+| daily_cap | Offer 每日预算限制，激活数不能超过这个值 |
+| id | Offer 唯一标识 |
 | kpitype | Offer 转化条件、KPI |
 | material | Offer 素材图片，包含多个尺寸的图片 |
 | min_os_version | 最低版本号，版本号低于此值是无效流量 |
 | platform | 平台， android 或者 ios |
 | preview_url | 预览链接，点击进入 google play 查看 offer |
 | price | Offer 单价 |
-| pricing_models | 计费事件CPC CPI等 |
+| pricing_models | 计费事件 CPI 等 |
 
 ## 4. Click_url 参数说明
 
 发送get请求，请求地址：
 ```bash
-http://callback.flatmobi.com/aff/click
+http://47.90.165.0/api/v1/click
 ```
 
 | 数据名称 | 参数说明 | 可选性 |
@@ -122,7 +120,7 @@ http://callback.flatmobi.com/aff/click
 
 示例：
 ```bash
-http://callback.flatmobi.com/aff/click?app_id=1000&offer_id=22&gaid=4716d154-7232-11ee-800e-e9037848532a&any_para1=somevalue1&any_para2=somevalue2
+http://47.90.165.0/api/v1/click?app_id=1000&offer_id=22&gaid=4716d154-7232-11ee-800e-e9037848532a&any_para1=somevalue1&any_para2=somevalue2
 ```
 
 ## 5. Postback 参数说明
