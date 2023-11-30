@@ -26,6 +26,7 @@ http://callback.flatmobi.com/offer/getoffer
 http://callback.flatmobi.com/offer/getoffer?app_id=1000&app_key=098f6bcd4621d373cade4e832627b4f6&countries=ID&paltform=android&price_type=CPI
 ```
 
+
 ## 3. 查询 offer 响应内容
 
 查询结果示例：
