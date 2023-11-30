@@ -1,6 +1,6 @@
 # Iplayable网盟平台下游对接文档
 ## 1. 概要
-本API文档包括线上调用Iplayable网盟平台Offer List的API方法，响应实例以及跟踪回掉参数的配置信息
+本API文档包括线上调用Iplayable网盟平台Offer List的API方法，响应实例，点击传入以及跟踪回掉参数的配置信息
 
 ## 2. 查询 offer
 
@@ -39,7 +39,7 @@ http://callback.flatmobi.com/offer/getoffer?app_id=1000&app_key=098f6bcd4621d373
             "app_pkg": "com.mmosea.android.dreamwars",
             "blockChannel": "",
             "category": "",
-            "click_url": "http://flatmobi.com/aff/click?app_id=5&offer_id=46&clickid={clickid}&gaid={gaid}&android={android}&idfa={idfa}&subid={subid}&affsub={affsub}",
+            "click_url": "http://flatmobi.com/aff/click?app_id=1000&offer_id=46&clickid={clickid}&gaid={gaid}&android={android}&idfa={idfa}&subid={subid}&affsub={affsub}",
             "countries": [],
             "daily_cap": 100,
             "des": "",
@@ -52,7 +52,7 @@ http://callback.flatmobi.com/offer/getoffer?app_id=1000&app_key=098f6bcd4621d373
             "platform": "android",
             "preview_url": "https://play.google.com/store/apps/details?id=com.mmosea.android.dreamwars",
             "price": 7,
-            "pricing_models": "CPM"
+            "pricing_models": "CPI"
         },
         {
             "app_icon": "",
@@ -60,7 +60,7 @@ http://callback.flatmobi.com/offer/getoffer?app_id=1000&app_key=098f6bcd4621d373
             "app_pkg": "id.moxa",
             "blockChannel": "",
             "category": "",
-            "click_url": "http://flatmobi.com/aff/click?app_id=5&offer_id=22&clickid={clickid}&gaid={gaid}&android={android}&idfa={idfa}&subid={subid}&affsub={affsub}",
+            "click_url": "http://flatmobi.com/aff/click?app_id=1000&offer_id=22&clickid={clickid}&gaid={gaid}&android={android}&idfa={idfa}&subid={subid}&affsub={affsub}",
             "countries": [
                 "IDN",
             ],
@@ -82,28 +82,25 @@ http://callback.flatmobi.com/offer/getoffer?app_id=1000&app_key=098f6bcd4621d373
 }
 ```
 
-响应内容为 json 字符串，status=access 表示请求成功，error 表示请求失败，total 表示 offer 总数。offers 为 offer 列表 offer 列表说明如下：
+响应内容为 json 字符串，"status": "success" 表示请求成功，"status": "fail" 表示请求失败，total 表示 offer 总数。datas 为 offer 列表，offer 列表说明如下：
 
-| 数据名称 | 参数说明 |
+| 字段名称 | 参数说明 |
 | -------- | -------- |
 | id | Offer 唯一标识 |
-| app_name | Offer 名称 |
-| app_icon | Offer 图标 |
+| app_name |  名称 |
 | app_pkg | 包名 |
-| price | Offer 单价 |
-| pricing_models | 计费事件cpc cpi等 |
 | click_url | Offer 跳转链接 |
 | daily_cap | Offer 每日预算限制，激活数不能超过这个值 |
-| preview_url | 预览链接，点击进入 google play 查看 offer |
 | countries | 国家 |
-| platform | 平台， android 或者 ios，多个平台以逗号分隔 |
 | isincent | 激励类型，1=激励 offer、0=非激励 offer |
 | des | offer 描述信息 |
-| material | Offer 素材图片，包含多个尺寸的图片 |
-| category | Offer 分类 |
 | kpitype | Offer 转化条件、KPI |
+| material | Offer 素材图片，包含多个尺寸的图片 |
 | min_os_version | 最低版本号，版本号低于此值是无效流量 |
-| BlockChannel | 禁止投放的subid |
+| platform | 平台， android 或者 ios |
+| preview_url | 预览链接，点击进入 google play 查看 offer |
+| price | Offer 单价 |
+| pricing_models | 计费事件CPC CPI等 |
 
 ## 4. Click_url 参数说明
 
