@@ -108,7 +108,7 @@ http://47.90.165.0/api/v1/getoffer?app_id=1000&app_key=098f6bcd4621d373cade4e832
 http://47.90.165.0/api/v1/click
 ```
 
-| 数据名称 | 参数说明 | 可选性 |
+| 字段名称 | 参数说明 | 可选性 |
 | -------- | -------- | ------ |
 | app_id | 渠道 id | 必传 |
 | offer_id | offerid | 必传 |
@@ -127,17 +127,17 @@ http://47.90.165.0/api/v1/click?app_id=1000&offer_id=22&gaid=4716d154-7232-11ee-
 
 Offer 激活之后，可以向 postback 地址发送一次请求，postback 时除了会带上第4部分点击里的所有参数外还会会传入以下参数：
 
-| 数据名称 | 参数说明 |
+| 字段名称 | 参数说明 |
 | -------- | -------- |
-| ClickID |  |
-| InstallTimeStamp |  |
-| BlockedReason |  |
-| BlockedSubReason |  |
-| BlockedReasonValue |  |
-| EventName |  |
-| EventRevenue |  |
-| EventTime |  |
-| EventValue |  |
+| clickid | 点击id，安装的唯一标识 |
+| insts | 安装时间 |
+| breason | 点击拒绝原因代号 |
+| bsub | 点击拒绝子原因代号 |
+| bvalue | 点击拒绝原因 |
+| ename | 后链路事件，注册或者付费等 |
+| erev | 后链路事件收益 |
+| etime | 后链路事件发生时间 |
+| evalue | 后链路事件内容 |
 | payout | Offer 收益，货币为美金 |
 
 Postback 示例 ：
