@@ -10,7 +10,7 @@ http://callback.flatmobi.com/offer/getoffer
 ```
 
 
-每次请求 offer 时，可以配置以下参数：
+每次请求 offer 时，API请求参数说明：
 
 | 参数名称 | 参数说明 | 示例 | 是否必须 |
 | -------- | -------- | ---- | -------- |
@@ -21,7 +21,7 @@ http://callback.flatmobi.com/offer/getoffer
 | price_type | Offer 出价类型，大写，多值使用逗号隔开 | CPM,CPC,CPI,CPE | 否 |
 
 
-查询 offer API（测试的 API，接入的正式 API 需要申请 app_id 和 app_key）:
+查询 offer API 调用示例（测试的 API，接入的正式 API 需要申请 app_id 和 app_key）:
 ```bash
 http://callback.flatmobi.com/offer/getoffer?app_id=1000&app_key=098f6bcd4621d373cade4e832627b4f6&countries=ID&paltform=android&price_type=CPI
 ```
