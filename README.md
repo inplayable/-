@@ -29,6 +29,58 @@ http://callback.flatmobi.com/offer/getoffer?app_id=1000&app_key=098f6bcd4621d373
 ## 3. 查询 offer 响应内容
 
 查询结果示例：
+```bash
+{
+    "code": 0,
+    "datas": [
+        {
+            "app_icon": "",
+            "app_name": "Dream Wars",
+            "app_pkg": "com.mmosea.android.dreamwars",
+            "blockChannel": "",
+            "category": "",
+            "click_url": "http://flatmobi.com/aff/click?app_id=5&offer_id=46&clickid={clickid}&gaid={gaid}&android={android}&idfa={idfa}&subid={subid}&affsub={affsub}",
+            "countries": [],
+            "daily_cap": 100,
+            "des": "",
+            "id": "46",
+            "impression_url": "",
+            "isincent": "0",
+            "kpitype": "sometestcomment",
+            "material": [],
+            "min_os_version": "",
+            "platform": "android",
+            "preview_url": "https://play.google.com/store/apps/details?id=com.mmosea.android.dreamwars",
+            "price": 7,
+            "pricing_models": "CPM"
+        },
+        {
+            "app_icon": "",
+            "app_name": "MOXA_id_android",
+            "app_pkg": "id.moxa",
+            "blockChannel": "",
+            "category": "",
+            "click_url": "http://flatmobi.com/aff/click?app_id=5&offer_id=22&clickid={clickid}&gaid={gaid}&android={android}&idfa={idfa}&subid={subid}&affsub={affsub}",
+            "countries": [
+                "IDN",
+            ],
+            "daily_cap": 10,
+            "des": "",
+            "id": "22",
+            "impression_url": "",
+            "isincent": "0",
+            "kpitype": "",
+            "material": [],
+            "min_os_version": "8.0",
+            "platform": "android",
+            "preview_url": "https://play.google.com/store/apps/details?id=id.moxa",
+            "price": 7,
+            "pricing_models": "CPI"
+        }
+    ],
+    "status": "success"
+}
+```
 
 响应内容为 json 字符串，status=access 表示请求成功，error 表示请求失败，total 表示 offer 总数。offers 为 offer 列表 offer 列表说明如下：
 
