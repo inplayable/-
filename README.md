@@ -102,9 +102,9 @@ http://47.90.165.0/api/v1/click
 | offer_id | offerid | 是 |
 | gaid | 谷歌广告 ID | android系统必传 |
 | idfa | IOS idfa | ios系统必传 |
-| 其他任何参数1 | 自定义参数1 | 否 |
-| 其他任何参数2 | 自定义参数2 | 否 |
-| 其他任何参数n | 自定义参数n | 否 |
+| para1 | 自定义参数1 | 否 |
+| para2 | 自定义参数2 | 否 |
+| paran | 自定义参数n | 否 |
 
 示例：
 ```bash
@@ -112,7 +112,7 @@ http://47.90.165.0/api/v1/click?app_id=1000&offer_id=22&gaid=4716d154-7232-11ee-
 ```
 
 ## 5. Postback 参数说明
-
+postback参数填充需经过一下两步
 5.1
 Offer 激活之后，可以向 postback 地址发送一次请求，首先我们会在postback中填写第4部分点击里的所有参数，填写示例如下：
 a.下有请求我们的Click_url
