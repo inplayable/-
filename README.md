@@ -108,14 +108,15 @@ http://47.90.165.0/api/v1/click
 
 示例：
 ```bash
-http://47.90.165.0/api/v1/click?app_id=1000&offer_id=22&gaid=4716d154-7232-11ee-800e-e9037848532a&any_para1=somevalue1&any_para2=somevalue2
+http://47.90.165.0/api/v1/click?app_id=1000&offer_id=22&gaid=4716d154-7232-11ee-800e-e9037848532a&para1=somevalue1&para1=somevalue2
 ```
 
 ## 5. Postback 参数说明
-postback参数填充需经过一下两步
+Offer 激活之后，可以向 postback 地址发送一次请求，首先会在postback中填写第4部分点击里的所有参数，如5.1所示；其次，还会写入5.2所示参数。
+
 5.1
-Offer 激活之后，可以向 postback 地址发送一次请求，首先我们会在postback中填写第4部分点击里的所有参数，填写示例如下：
-a.下有请求我们的Click_url
+
+a.下游发送的的Click_url
 
 5.2
 postback 时除了会带上第4部分点击里的所有参数外还会会传入以下参数：
