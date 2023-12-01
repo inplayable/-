@@ -22,9 +22,9 @@ http://47.90.165.0/api/v1/getoffer
 
 
 查询 offer API 调用示例（测试的 API，接入的正式 API 需要申请 app_id 和 app_key）:
-```bash
+
 http://47.90.165.0/api/v1/getoffer?app_id=1000&app_key=098f6bcd4621d373cade4e832627b4f6&countries=ID&paltform=android&price_type=CPI
-```
+
 
 
 ## 3. 查询 offer 响应内容
@@ -96,27 +96,37 @@ http://47.90.165.0/api/v1/getoffer?app_id=1000&app_key=098f6bcd4621d373cade4e832
 http://47.90.165.0/api/v1/click
 ```
 
-| 字段名称 | 参数说明 | 是否必须 |
-| -------- | -------- | ------ |
-| app_id | 渠道 id | 是 |
-| offer_id | offerid | 是 |
-| gaid | 谷歌广告 ID | android系统必传 |
-| idfa | IOS idfa | ios系统必传 |
-| para1 | 自定义参数1 | 否 |
-| para2 | 自定义参数2 | 否 |
-| paran | 自定义参数n | 否 |
+| 字段名称 | 对应宏参 | 参数说明 | 是否必须 |
+| -------- | ------ | -------- | ------ |
+| app_id | {app_id} | 渠道 id | 是 |
+| offer_id | {offer_id} | offerid | 是 |
+| gaid | {gaid} | 谷歌广告 ID | android系统必传 |
+| idfa | {idfa} | IOS idfa | ios系统必传 |
+| para1 | {para1} | 自定义参数1 | 否 |
+| para2 | {para2} | 自定义参数2 | 否 |
+| paran | {paran} | 自定义参数n | 否 |
 
 示例：
-```bash
+
 http://47.90.165.0/api/v1/click?app_id=1000&offer_id=22&gaid=4716d154-7232-11ee-800e-e9037848532a&para1=somevalue1&para1=somevalue2
-```
+
 
 ## 5. Postback 参数说明
 Offer 激活之后，可以向 postback 地址发送一次请求，首先会在postback中填写第4部分点击里的所有参数，如5.1所示；其次，还会写入5.2所示参数。
 
-5.1
+5.1将第4部分点击里的参数填充到postbanck中。
 
-a.下游发送的的Click_url
+5.1.1 系统配置postback url，例如：
+
+http://your_domain.com/your/route?cbpara={qqq}&cbpara2={abc}&cbpara3={mn}&other_fix=fixvalue&other_fix2=value2&camp={offer_id}
+
+5.1.2 从下游发送的的Click_url提取宏，例如：
+
+
+http://47.90.165.0/api/v1/click?app_id=1000&offer_id=22&gaid=4716d154-7232-11ee-800e-e9037848532a&para1=somevalue1&para1=somevalue2
+
+
+5.1.3
 
 5.2
 postback 时除了会带上第4部分点击里的所有参数外还会会传入以下参数：
