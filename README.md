@@ -112,9 +112,11 @@ http://47.90.165.0/api/v1/click
 
 示例：
 
-查询offer时获取到的 click_url 参数：
+查询offer时获取到的 click_url ：
 
 http://47.90.165.0/api/v1/getoffer?app_id=1000&offer_id=22&clickid={clickid}&gaid={gaid}&android={android}&idfa={idfa}&subid={subid}&affsub={affsub}
+
+下游使用宏参替换后并发送给Iplayable网盟平台的 click_url ：
 
 http://47.90.165.0/api/v1/click?app_id=1000&offer_id=22&clickid=abc&gaid=4716d154-7232-11ee-800e-e9037848532a&android={android}&idfa={idfa}&subid={subid}&affsub=testabc&para1=somevalue1&para2=somevalue2
 
