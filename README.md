@@ -168,11 +168,11 @@ http://your.domain.com/your/route?click_id={clickid}&aff_id={app_id}&camp={offer
 | {insts} | 2023-11-11 |
 | {breason} | test1 |
 | {payout} | 1.5 |
-| {para1} | your_name |
+| {para1} | somevalue1 |
 | {para2} | somevalue2 |
 
 5.3 填充postback url ，并使用填充后的url进行 get 请求，填充结果如下：
 
-http://your.domain.com/postback?click_id=abc&aff_id=1000&camp=22&blockreason=test1&payout=1.5&&other_fix=fixvalue&other_fix2=fixvalue2&your_name=your_name
+http://your.domain.com/postback?click_id=abc&aff_id=1000&camp=22&blockreason=test1&payout=1.5&&other_fix=fixvalue&other_fix2=fixvalue2&your_name=somevalue1
 
 your.domain.com/postback 请替换为自己的回调域名和路由路径
