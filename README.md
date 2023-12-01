@@ -125,6 +125,15 @@ http://your.domain.com/your/route?cbpara={qqq}&cbpara2={abc}&cbpara3={mn}&other_
 
 http://47.90.165.0/api/v1/click?app_id=1000&offer_id=22&gaid=4716d154-7232-11ee-800e-e9037848532a&para1=somevalue1&para1=somevalue2
 
+提取到的宏参如下：
+
+| 宏参 | 宏参值 |
+| --- | ------ |
+| {app_id} | 1000 |
+| {offer_id} | 22 |
+| {gaid} | 4716d154-7232-11ee-800e-e9037848532a |
+| {para1} | somevalue1 |
+| {para2} | somevalue2 |
 
 5.1.3
 
