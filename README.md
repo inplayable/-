@@ -16,9 +16,9 @@ http://47.90.165.0/api/v1/getoffer
 | -------- | -------- | ---- | -------- |
 | app_id | 渠道 ID，分配给渠道的唯一标识 | 50 | 是 |
 | app_key | 请求 KEY，验证请求的合法性（32位长度字符串） | 098f6bcd4621d373cade4e832627b4f6 | 是 |
-| countries | Offer 国家，两位大写字符国家简写，多个国家用逗号隔开 | ID,TH,HK | 否 |
-| platform | Offer 操作系统，多系统使用逗号隔开 | android,ios | 否 |
-| price_type | Offer 出价类型，大写，多值使用逗号隔开 | CPM,CPC,CPI,CPE | 否 |
+| countries | Offer 国家，支持大小写，两位字符国家简写，多值使用逗号隔开 | ID,TH,HK | 否 |
+| platform | Offer 操作系统，支持大小写，多值使用逗号隔开 | android,ios | 否 |
+| price_type | Offer 出价类型，支持大小写，多值使用逗号隔开 | CPM,CPC,CPI,CPE | 否 |
 
 
 查询 offer API 调用示例（测试的 API，接入的正式 API 需要申请 app_id 和 app_key）:
@@ -35,18 +35,12 @@ http://47.90.165.0/api/v1/getoffer?app_id=1000&app_key=098f6bcd4621d373cade4e832
     "code": 0,
     "datas": [
         {
-            "app_icon": "",
             "app_name": "Dream Wars",
             "app_pkg": "com.mmosea.android.dreamwars",
-            "blockChannel": "",
-            "category": "",
-            "click_url": "http://flatmobi.com/aff/click?app_id=1000&offer_id=46&clickid={clickid}&gaid={gaid}&android={android}&idfa={idfa}&subid={subid}&affsub={affsub}",
+            "click_url": "http://47.90.165.0/api/v1/getoffer?app_id=1000&offer_id=46&clickid={clickid}&gaid={gaid}&android={android}&idfa={idfa}&subid={subid}&affsub={affsub}",
             "countries": [],
             "daily_cap": 100,
-            "des": "",
             "id": "46",
-            "impression_url": "",
-            "isincent": "0",
             "kpitype": "sometestcomment",
             "material": [],
             "min_os_version": "",
@@ -56,20 +50,14 @@ http://47.90.165.0/api/v1/getoffer?app_id=1000&app_key=098f6bcd4621d373cade4e832
             "pricing_models": "CPI"
         },
         {
-            "app_icon": "",
             "app_name": "MOXA_id_android",
             "app_pkg": "id.moxa",
-            "blockChannel": "",
-            "category": "",
-            "click_url": "http://flatmobi.com/aff/click?app_id=1000&offer_id=22&clickid={clickid}&gaid={gaid}&android={android}&idfa={idfa}&subid={subid}&affsub={affsub}",
+            "click_url": "http://47.90.165.0/api/v1/getoffer?app_id=1000&offer_id=22&clickid={clickid}&gaid={gaid}&android={android}&idfa={idfa}&subid={subid}&affsub={affsub}",
             "countries": [
                 "IDN",
             ],
             "daily_cap": 10,
-            "des": "",
             "id": "22",
-            "impression_url": "",
-            "isincent": "0",
             "kpitype": "",
             "material": [],
             "min_os_version": "8.0",
@@ -108,15 +96,15 @@ http://47.90.165.0/api/v1/getoffer?app_id=1000&app_key=098f6bcd4621d373cade4e832
 http://47.90.165.0/api/v1/click
 ```
 
-| 字段名称 | 参数说明 | 可选性 |
+| 字段名称 | 参数说明 | 是否必须 |
 | -------- | -------- | ------ |
-| app_id | 渠道 id | 必传 |
-| offer_id | offerid | 必传 |
+| app_id | 渠道 id | 是 |
+| offer_id | offerid | 是 |
 | gaid | 谷歌广告 ID | android系统必传 |
 | idfa | IOS idfa | ios系统必传 |
-| 其他任何参数1 |  |  |
-| 其他任何参数2 |  |  |
-| 其他任何参数n |  |  |
+| 其他任何参数1 | 自定义参数1 | 否 |
+| 其他任何参数2 | 自定义参数2 | 否 |
+| 其他任何参数n | 自定义参数n | 否 |
 
 示例：
 ```bash
@@ -125,7 +113,12 @@ http://47.90.165.0/api/v1/click?app_id=1000&offer_id=22&gaid=4716d154-7232-11ee-
 
 ## 5. Postback 参数说明
 
-Offer 激活之后，可以向 postback 地址发送一次请求，postback 时除了会带上第4部分点击里的所有参数外还会会传入以下参数：
+5.1
+Offer 激活之后，可以向 postback 地址发送一次请求，首先我们会在postback中填写第4部分点击里的所有参数，填写示例如下：
+a.下有请求我们的Click_url
+
+5.2
+postback 时除了会带上第4部分点击里的所有参数外还会会传入以下参数：
 
 | 字段名称 | 参数说明 |
 | -------- | -------- |
