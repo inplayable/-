@@ -118,7 +118,7 @@ Offer 激活之后，可以向 postback 地址发送一次请求，首先会在p
 
 5.1.1 系统配置postback url，例如：
 
-http://your_domain.com/your/route?cbpara={qqq}&cbpara2={abc}&cbpara3={mn}&other_fix=fixvalue&other_fix2=value2&camp={offer_id}
+http://your.domain.com/your/route?cbpara={qqq}&cbpara2={abc}&cbpara3={mn}&other_fix=fixvalue&other_fix2=value2&camp={offer_id}
 
 5.1.2 从下游发送的的Click_url提取宏，例如：
 
