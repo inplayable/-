@@ -100,25 +100,58 @@ http://47.90.165.0/api/v1/click
 | -------- | ------ | -------- | ------ |
 | app_id | {app_id} | 渠道 id | 是 |
 | offer_id | {offer_id} | offerid | 是 |
+| clickid | {clickid} | 下游渠道生成的click id | 是 |
 | gaid | {gaid} | 谷歌广告 ID | android系统必传 |
 | idfa | {idfa} | IOS idfa | ios系统必传 |
+| android | {android} |  | 否 |
+| affsub | {affsub} | 子渠道信息 | 否 |
+| subid | {subid} | 子渠道 id | 否 |
 | para1 | {para1} | 自定义参数1 | 否 |
 | para2 | {para2} | 自定义参数2 | 否 |
-| paran | {paran} | 自定义参数n | 否 |
+| para3 | {para3} | 自定义参数3 | 否 |
 
 示例：
 
-http://47.90.165.0/api/v1/click?app_id=1000&offer_id=22&gaid=4716d154-7232-11ee-800e-e9037848532a&para1=somevalue1&para1=somevalue2
+查询offer时获取到的 click_url 参数：
+
+http://47.90.165.0/api/v1/getoffer?app_id=1000&offer_id=22&clickid={clickid}&gaid={gaid}&android={android}&idfa={idfa}&subid={subid}&affsub={affsub}
+
+http://47.90.165.0/api/v1/click?app_id=1000&offer_id=22&clickid=abc&gaid=4716d154-7232-11ee-800e-e9037848532a&android={android}&idfa={idfa}&subid={subid}&affsub=testabc&para1=somevalue1&para2=somevalue2
 
 
 ## 5. Postback 参数说明
+
+Iplayable网盟平台支持的宏参数：
+
+| 字段名称 | 参数说明 |
+| -------- | -------- |
+| {clickid} | 点击id，安装的唯一标识 |
+| {insts} | 安装时间 |
+| {breason} | 点击拒绝原因代号 |
+| {bsub} | 点击拒绝子原因代号 |
+| {bvalue} | 点击拒绝原因 |
+| {ename} | 后链路事件，注册或者付费等 |
+| {erev} | 后链路事件收益 |
+| {etime} | 后链路事件发生时间 |
+| {evalue} | 后链路事件内容 |
+| {payout} | Offer 收益，货币为美金 |
+| {app_id} | 渠道 ID，分配给渠道的唯一标识 |
+| {offer_id} | 单子唯一标识 |
+| {gaid} | 谷歌广告 ID |
+| {idfa} | IOS idfa |
+| {para1} | 自定义参数1 |
+| {para2} | 自定义参数2 |
+| {para3} | 自定义参数3 |
+
+
+
 Offer 激活之后，可以向 postback 地址发送一次请求，首先会在postback中填写第4部分点击里的所有参数，如5.1所示；其次，还会写入5.2所示参数。
 
-5.1将第4部分点击里的参数填充到postbanck中。
+5.1 将第4部分点击里的参数填充到postbanck中。
 
 5.1.1 系统配置postback url，例如：
 
-http://your.domain.com/your/route?cbpara={qqq}&cbpara2={abc}&cbpara3={mn}&other_fix=fixvalue&other_fix2=value2&camp={offer_id}
+http://your.domain.com/your/route?aff_id={app_id}&camp={offer_id}&other_fix=fixvalue&other_fix2=fixvalue2
 
 5.1.2 从下游发送的的Click_url提取宏，例如：
 
@@ -140,18 +173,7 @@ http://47.90.165.0/api/v1/click?app_id=1000&offer_id=22&gaid=4716d154-7232-11ee-
 5.2
 postback 时除了会带上第4部分点击里的所有参数外还会会传入以下参数：
 
-| 字段名称 | 参数说明 |
-| -------- | -------- |
-| clickid | 点击id，安装的唯一标识 |
-| insts | 安装时间 |
-| breason | 点击拒绝原因代号 |
-| bsub | 点击拒绝子原因代号 |
-| bvalue | 点击拒绝原因 |
-| ename | 后链路事件，注册或者付费等 |
-| erev | 后链路事件收益 |
-| etime | 后链路事件发生时间 |
-| evalue | 后链路事件内容 |
-| payout | Offer 收益，货币为美金 |
+
 
 Postback 示例 ：
 ```bash
