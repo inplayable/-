@@ -96,6 +96,8 @@ http://47.90.165.0/api/v1/getoffer?app_id=1000&app_key=098f6bcd4621d373cade4e832
 http://47.90.165.0/api/v1/click
 ```
 
+点击请求参数：
+
 | 字段名称 | 对应宏参 | 参数说明 | 是否必须 |
 | -------- | ------ | -------- | ------ |
 | app_id | {app_id} | 渠道 id | 是 |
@@ -152,7 +154,7 @@ Iplayable网盟平台支持的宏参数：
 
 5.1 系统配置postback url，例如：
 
-http://your.domain.com/your/route?click_id={clickid}aff_id={app_id}&camp={offer_id}&blockreason={breason}&other_fix=fixvalue&other_fix2=fixvalue2
+http://your.domain.com/your/route?click_id={clickid}&aff_id={app_id}&camp={offer_id}&blockreason={breason}&payout={payout}&other_fix=fixvalue&other_fix2=fixvalue2
 
 5.2 从下游发送的的 Click_url 以及 Iplayable 网盟平台从上游或者三方回调提取宏参，如下：
 
@@ -163,17 +165,14 @@ http://your.domain.com/your/route?click_id={clickid}aff_id={app_id}&camp={offer_
 | {clickid} | abc |
 | {gaid} | 4716d154-7232-11ee-800e-e9037848532a |
 | {affsub} | testabc |
+| {insts} | 2023-11-11 |
+| {breason} | test1 |
+| {payout} | 1.5 |
 | {para1} | somevalue1 |
 | {para2} | somevalue2 |
 
-5.1.3
+5.3 填充postback url ，并使用填充后的url进行 get 请求，填充结果如下：
 
-5.2
-postback 时除了会带上第4部分点击里的所有参数外还会会传入以下参数：
+http://your.domain.com/postback?click_id=abc&aff_id=1000&camp=22&blockreason=test1&payout=1.5&&other_fix=fixvalue&other_fix2=fixvalue2
 
-
-
-Postback 示例 ：
-```bash
-http://your.domain.com/postback?app_id=1000&offer_id=22&gaid=4716d154-7232-11ee-800e-e9037848532a&any_para1=somevalue1&any_para2=somevalue2&payout=1.5
-```
+your.domain.com/postback 请替换为自己的回调域名和路由路径
