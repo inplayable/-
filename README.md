@@ -116,7 +116,7 @@ http://47.90.165.0/api/v1/click
 
 http://47.90.165.0/api/v1/getoffer?app_id=1000&offer_id=22&clickid={clickid}&gaid={gaid}&android={android}&idfa={idfa}&subid={subid}&affsub={affsub}
 
-下游使用宏参替换后并发送给Iplayable网盟平台的 click_url ：
+下游使用宏参替换后并发送给 Iplayable 网盟平台的 click_url ：
 
 http://47.90.165.0/api/v1/click?app_id=1000&offer_id=22&clickid=abc&gaid=4716d154-7232-11ee-800e-e9037848532a&android={android}&idfa={idfa}&subid={subid}&affsub=testabc&para1=somevalue1&para2=somevalue2
 
@@ -125,7 +125,7 @@ http://47.90.165.0/api/v1/click?app_id=1000&offer_id=22&clickid=abc&gaid=4716d15
 
 Iplayable网盟平台支持的宏参数：
 
-| 字段名称 | 参数说明 |
+| 宏参 | 参数说明 |
 | -------- | -------- |
 | {clickid} | 点击id，安装的唯一标识 |
 | {insts} | 安装时间 |
@@ -139,34 +139,30 @@ Iplayable网盟平台支持的宏参数：
 | {payout} | Offer 收益，货币为美金 |
 | {app_id} | 渠道 ID，分配给渠道的唯一标识 |
 | {offer_id} | 单子唯一标识 |
+| {clickid} | 下游渠道生成的click id |
 | {gaid} | 谷歌广告 ID |
 | {idfa} | IOS idfa |
+| {android} |  |
+| {affsub} | 子渠道信息 |
+| {subid} | 子渠道 id |
 | {para1} | 自定义参数1 |
 | {para2} | 自定义参数2 |
 | {para3} | 自定义参数3 |
 
 
+5.1 系统配置postback url，例如：
 
-Offer 激活之后，可以向 postback 地址发送一次请求，首先会在postback中填写第4部分点击里的所有参数，如5.1所示；其次，还会写入5.2所示参数。
+http://your.domain.com/your/route?click_id={clickid}aff_id={app_id}&camp={offer_id}&blockreason={breason}&other_fix=fixvalue&other_fix2=fixvalue2
 
-5.1 将第4部分点击里的参数填充到postbanck中。
-
-5.1.1 系统配置postback url，例如：
-
-http://your.domain.com/your/route?aff_id={app_id}&camp={offer_id}&other_fix=fixvalue&other_fix2=fixvalue2
-
-5.1.2 从下游发送的的Click_url提取宏，例如：
-
-
-http://47.90.165.0/api/v1/click?app_id=1000&offer_id=22&gaid=4716d154-7232-11ee-800e-e9037848532a&para1=somevalue1&para1=somevalue2
-
-提取到的宏参如下：
+5.2 从下游发送的的 Click_url 以及 Iplayable 网盟平台从上游或者三方回调提取宏参，如下：
 
 | 宏参 | 宏参值 |
 | --- | ------ |
 | {app_id} | 1000 |
 | {offer_id} | 22 |
+| {clickid} | abc |
 | {gaid} | 4716d154-7232-11ee-800e-e9037848532a |
+| {affsub} | testabc |
 | {para1} | somevalue1 |
 | {para2} | somevalue2 |
 
