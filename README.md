@@ -6,7 +6,7 @@
 
 请求地址：
 ```bash
-http://47.90.165.0/api/v1/getoffer
+http://callback.flatmobi.com/api/v1/getoffer
 ```
 
 
@@ -23,7 +23,7 @@ http://47.90.165.0/api/v1/getoffer
 
 查询 offer API 调用示例（测试的 API，接入的正式 API 需要申请 app_id 和 app_key）:
 
-http://47.90.165.0/api/v1/getoffer?app_id=1000&app_key=098f6bcd4621d373cade4e832627b4f6&countries=ID&paltform=android&price_type=CPI
+http://callback.flatmobi.com/api/v1/getoffer?app_id=1000&app_key=098f6bcd4621d373cade4e832627b4f6&countries=ID&paltform=android&price_type=CPI
 
 
 
@@ -37,7 +37,7 @@ http://47.90.165.0/api/v1/getoffer?app_id=1000&app_key=098f6bcd4621d373cade4e832
         {
             "app_name": "Dream Wars",
             "app_pkg": "com.mmosea.android.dreamwars",
-            "click_url": "http://47.90.165.0/api/v1/getoffer?app_id=1000&offer_id=46&clickid={clickid}&gaid={gaid}&android={android}&idfa={idfa}&subid={subid}&affsub={affsub}",
+            "click_url": "http://callback.flatmobi.com/api/v1/getoffer?app_id=1000&offer_id=46&clickid={clickid}&gaid={gaid}&android={android}&idfa={idfa}&subid={subid}&affsub={affsub}",
             "countries": [],
             "daily_cap": 100,
             "id": "46",
@@ -52,7 +52,7 @@ http://47.90.165.0/api/v1/getoffer?app_id=1000&app_key=098f6bcd4621d373cade4e832
         {
             "app_name": "MOXA_id_android",
             "app_pkg": "id.moxa",
-            "click_url": "http://47.90.165.0/api/v1/getoffer?app_id=1000&offer_id=22&clickid={clickid}&gaid={gaid}&android={android}&idfa={idfa}&subid={subid}&affsub={affsub}",
+            "click_url": "http://callback.flatmobi.com/api/v1/getoffer?app_id=1000&offer_id=22&clickid={clickid}&gaid={gaid}&android={android}&idfa={idfa}&subid={subid}&affsub={affsub}",
             "countries": [
                 "IDN",
             ],
@@ -93,7 +93,7 @@ http://47.90.165.0/api/v1/getoffer?app_id=1000&app_key=098f6bcd4621d373cade4e832
 
 发送get请求，请求地址：
 ```bash
-http://47.90.165.0/api/v1/click
+http://callback.flatmobi.com/api/v1/click
 ```
 
 点击请求参数：
@@ -114,13 +114,13 @@ http://47.90.165.0/api/v1/click
 
 示例：
 
-查询offer时获取到的 click_url ：
+在第3步查询offer时获取到的 click_url ：
 
-http://47.90.165.0/api/v1/getoffer?app_id=1000&offer_id=22&clickid={clickid}&gaid={gaid}&android={android}&idfa={idfa}&subid={subid}&affsub={affsub}
+http://callback.flatmobi.com/api/v1/getoffer?app_id=1000&offer_id=22&clickid={clickid}&gaid={gaid}&android={android}&idfa={idfa}&subid={subid}&affsub={affsub}
 
 下游使用宏参替换后并发送给 Iplayable 网盟平台的 click_url ：
 
-http://47.90.165.0/api/v1/click?app_id=1000&offer_id=22&clickid=abc&gaid=4716d154-7232-11ee-800e-e9037848532a&android={android}&idfa={idfa}&subid={subid}&affsub=testabc&para1=somevalue1&para2=somevalue2
+http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&clickid=abc&gaid=4716d154-7232-11ee-800e-e9037848532a&android={android}&idfa={idfa}&subid={subid}&affsub=testabc&para1=somevalue1&para2=somevalue2
 
 
 ## 5. Postback 参数说明
