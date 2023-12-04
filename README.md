@@ -75,8 +75,8 @@ http://callback.flatmobi.com/api/v1/getoffer?app_id=1000&app_key=098f6bcd4621d37
 
 | 字段名称 | 字段类型 | 参数说明 |
 | -------- | ------ | -------- |
-| app_name | string |  名称 |
-| app_pkg | string | 包名 |
+| app_name | string |  app 名称 |
+| app_pkg | string | app 包名 |
 | click_url | string | Offer 跳转链接 |
 | countries | string | 国家 |
 | daily_cap | int | Offer 每日预算限制，激活数不能超过这个值 |
@@ -114,49 +114,51 @@ http://callback.flatmobi.com/api/v1/click
 
 示例：
 
-在第3步查询offer时获取到的 click_url ：
+在第3步查询 offer 响应内容示例中datas字段中的 click_url 为 ：
 
 http://callback.flatmobi.com/api/v1/getoffer?app_id=1000&offer_id=22&clickid={clickid}&gaid={gaid}&android={android}&idfa={idfa}&subid={subid}&affsub={affsub}
 
-下游使用宏参替换后并发送给 Iplayable 网盟平台的 click_url ：
+点击上报时将 {click_id}，{gaid} 等替换为自己渠道的宏，替换后发送给 Iplayable 网盟平台，例如 ：
 
 http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&clickid=abc&gaid=4716d154-7232-11ee-800e-e9037848532a&android={android}&idfa={idfa}&subid={subid}&affsub=testabc&para1=somevalue1&para2=somevalue2
 
-
-## 5. Postback 参数说明
-
-Iplayable网盟平台支持的宏参数：
-
-| 宏参 | 参数说明 |
-| -------- | -------- |
-| {clickid} | 点击id，安装的唯一标识 |
-| {insts} | 安装时间 |
-| {breason} | 点击拒绝原因代号 |
-| {bsub} | 点击拒绝子原因代号 |
-| {bvalue} | 点击拒绝原因 |
-| {ename} | 后链路事件，注册或者付费等 |
-| {erev} | 后链路事件收益 |
-| {etime} | 后链路事件发生时间 |
-| {evalue} | 后链路事件内容 |
-| {payout} | Offer 收益，货币为美金 |
-| {app_id} | 渠道 ID，分配给渠道的唯一标识 |
-| {offer_id} | 单子唯一标识 |
-| {clickid} | 下游渠道生成的click id |
-| {gaid} | 谷歌广告 ID |
-| {idfa} | IOS idfa |
-| {android} |  |
-| {affsub} | 子渠道信息 |
-| {subid} | 子渠道 id |
-| {para1} | 自定义参数1 |
-| {para2} | 自定义参数2 |
-| {para3} | 自定义参数3 |
+注：para1、para2、para3 为预留自定义参数，若需要在 postback 中回传一些额外内容可在此添加，添加格式如上方示例 url ，并与 Iplayable 平台客户经理联系在 postback 中配置，配置细节将在第 5 节中说明。
 
 
-5.1 系统配置postback url，例如：
+## 5. Postback 配置说明
+
+Iplayable 网盟平台支持的回调链接宏参数：
+
+| 宏参 | 参数说明 | 是否必须 |
+| --- | ------- | ------- |
+| {clickid} | 点击id，下游渠道生成的click id ，安装的唯一标识 | 是 |
+| {app_id} | 渠道 ID，分配给渠道的唯一标识 | 是 |
+| {offer_id} | 单子唯一标识 | 是 |
+| {gaid} | 谷歌广告 ID | android系统必传 |
+| {idfa} | IOS idfa | ios系统必传 |
+| {android} | android信息 | 否 |
+| {affsub} | 子渠道信息 | 否 |
+| {subid} | 子渠道 id | 否 |
+| {para1} | 自定义参数1 | 否 |
+| {para2} | 自定义参数2 | 否 |
+| {para3} | 自定义参数3 | 否 |
+| {insts} | 安装时间戳 | 否 |
+| {breason} | Block reason | 否 |
+| {bsub} | Block sub reason | 否 |
+| {bvalue} | Block value | 否 |
+| {ename} | 后链路事件，注册或者付费等 | 否 |
+| {erev} | 后链路事件收益 | 否 |
+| {etime} | 后链路事件时间戳 | 否 |
+| {evalue} | 后链路事件value | 否 |
+| {payout} | Offer 收益，货币为美金 | 否 |
+
+在进行安装回传时，首先需要在 Iplayable 平台配置 postback url ，然后 Iplayable 平台会根据下游发送的点击以及上游或三方传来的安装数据填充 postback url ，最后使用填充后的 postback url 进行get请求，示例如下：
+
+a. Iplayable 系统配置postback url，例如：
 
 http://your.domain.com/your/route?click_id={clickid}&aff_id={app_id}&camp={offer_id}&blockreason={breason}&payout={payout}&other_fix=fixvalue&other_fix2=fixvalue2&your_name={para1}
 
-5.2 从下游发送的的 Click_url 以及 Iplayable 网盟平台从上游或者三方回调提取宏参，如下：
+b. 从下游发送的的 Click_url 以及 Iplayable 网盟平台从上游或者三方回调提取宏参，如下：
 
 | 宏参 | 宏参值 |
 | --- | ------ |
@@ -171,7 +173,7 @@ http://your.domain.com/your/route?click_id={clickid}&aff_id={app_id}&camp={offer
 | {para1} | somevalue1 |
 | {para2} | somevalue2 |
 
-5.3 填充postback url ，并使用填充后的url进行 get 请求，填充结果如下：
+c. 填充postback url ，并使用填充后的url进行 get 请求，填充结果如下：
 
 http://your.domain.com/postback?click_id=abc&aff_id=1000&camp=22&blockreason=test1&payout=1.5&&other_fix=fixvalue&other_fix2=fixvalue2&your_name=somevalue1
 
