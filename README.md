@@ -71,23 +71,23 @@ http://callback.flatmobi.com/api/v1/getoffer?app_id=1000&app_key=098f6bcd4621d37
 }
 ```
 
-响应内容为 json 字符串，"status": "success" 表示请求成功，"status": "fail" 表示请求失败，total 表示 offer 总数。datas 为 offer 列表，offer 列表说明如下：
+响应内容为 json 字符串，"status": "success" 表示请求成功，"status": "fail" 表示请求失败。datas 为 offer 列表，offer 列表字段说明如下：
 
-| 字段名称 | 参数说明 |
-| -------- | -------- |
-| app_name |  名称 |
-| app_pkg | 包名 |
-| click_url | Offer 跳转链接 |
-| countries | 国家 |
-| daily_cap | Offer 每日预算限制，激活数不能超过这个值 |
-| id | Offer 唯一标识 |
-| kpitype | Offer 转化条件、KPI |
-| material | Offer 素材图片，包含多个尺寸的图片 |
-| min_os_version | 最低版本号，版本号低于此值是无效流量 |
-| platform | 平台， android 或者 ios |
-| preview_url | 预览链接，点击进入 google play 查看 offer |
-| price | Offer 单价 |
-| pricing_models | 计费事件 CPI 等 |
+| 字段名称 | 字段类型 | 参数说明 |
+| -------- | ------ | -------- |
+| app_name | string |  名称 |
+| app_pkg | string | 包名 |
+| click_url | string | Offer 跳转链接 |
+| countries | string | 国家 |
+| daily_cap | int | Offer 每日预算限制，激活数不能超过这个值 |
+| id | string | Offer 唯一标识 |
+| kpitype | string | Offer 转化条件、KPI |
+| material | []string | Offer 素材图片，包含多个尺寸的图片 |
+| min_os_version | string | 最低版本号，版本号低于此值是无效流量 |
+| platform | string | 平台， android 或者 ios |
+| preview_url | string | 预览链接，点击进入 google play 查看 offer |
+| price | float32 | Offer 单价 |
+| pricing_models | string | 计费事件 CPI 等 |
 
 ## 4. Click_url 参数说明
 
