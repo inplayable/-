@@ -1,6 +1,6 @@
 # Iplayable网盟平台运营配置指南
 ## 1. 概要
-本文档旨在说明 Iplayable 网盟平台运营人员需要进行的详细操作以及需要配置的内容。本文档分为两个部分，第一部分为与下游对接并在 Iplayable 平台中配置相关内容，第二部分为与上游/三方对接并在 Iplayable 平台中配置相关内容。
+本文档旨在说明 Iplayable 网盟平台运营人员需要进行的详细操作以及需要配置的内容。本文档分为两个部分，第一部分为与下游对接并在 Iplayable 平台中配置相关内容，请参考第 2 节；第二部分为与上游/三方对接并在 Iplayable 平台中配置相关内容，请参考第 3 节。
 
 ## 2. 对接下游
 
@@ -30,7 +30,7 @@ http://callback.flatmobi.com/api/v1/getoffer?app_id={app_id}&offer_id={offer_id}
 | para2 | {para2} | 自定义参数2 | 否 |
 | para3 | {para3} | 自定义参数3 | 否 |
 
-注：para1、para2、para3 为预留自定义参数，若需要在 postback 中回传一些额外内容可在此添加，添加格式如下方示例 url ，并需要 Iplayable 平台运营在 postback_url 中进行相关配置，配置细节将在 2.2 节中说明。
+注：para1、para2、para3 为预留自定义参数，若下游需要在 postback 中回传一些额外内容可在此添加，添加格式如下方示例 url ，并需要 Iplayable 平台运营在 postback_url 中进行相关配置，配置细节将在 2.2 节中说明。
 
 点击上报时将 {click_id}，{gaid} 等由下游进行替换，替换后发送给 Iplayable 网盟平台，例如 ：
 
@@ -39,6 +39,20 @@ http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&clickid=abc&ga
 注：没有使用宏替换的参数表示下游不提供该参数。
 
 ### 2.2 配置 postback_url
+
+这里配置的 postback_url 为 Iplayable 平台需要回传给下游的信息，填写位置为 downstream 表的 postback_url 字段。
+
+postback_url 字段填写示例：
+
+http://some.downstream.domain.com/postback?your_click_para={clickid}&your_aff_para={app_id}&your_camp_para={offer_id}&your_blockreason_para={breason}&your_payout_para={payout}&other_fix=fixvalue&other_fix2=fixvalue2&down_para_name={para1}
+
+postback_url 注解：
+
+在真实单子中配置时，请将 some.downstream.domain.com、postback 替换为下游的回调主域名和路径；down_click_para、down_aff_para、down_camp_para、down_blockreason_para、down_payout_para 请替换为下游的参数名；other_fix、other_fix2 为可配置的固定回传参数，配置时请替换为下游的固定参数名称；down_para_name 为第 2.1 节中接收到的预留自定义参数，请替换为下游的自定义参数名称。
+
+例如，替换后的 postback_url（填写到数据库中的内容）可以是：
+
+http://www.baidu.com/postback?click={clickid}&aff={app_id}&camp={offer_id}&blockreason={breason}&payout={payout}&goods=fixvalue&update=fixvalue2&third_party={para1}
 
 Iplayable 网盟平台支持的回调链接宏参数：
 
@@ -64,6 +78,8 @@ Iplayable 网盟平台支持的回调链接宏参数：
 | {etime} | 后链路事件时间戳 | 否 |
 | {evalue} | 后链路事件value | 否 |
 | {payout} | Offer 收益，货币为美金 | 否 |
+
+注：仅支持以上宏参
 
 在进行安装回传时，需要三步，首先需要在 Iplayable 平台配置 postback url ，然后 Iplayable 平台会根据下游发送的点击以及上游或三方传来的回调数据提取宏参，最后 IPlayable 平台会使用提取的填充 postback url 使用填充后的 postback url 对下游进行get请求，**示例如下：**
 
