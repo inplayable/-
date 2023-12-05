@@ -152,7 +152,7 @@ Iplayable 网盟平台支持的回调链接宏参数：
 | {evalue} | 后链路事件value | 否 |
 | {payout} | Offer 收益，货币为美金 | 否 |
 
-在进行安装回传时，需要三步，首先需要在 Iplayable 平台配置 postback url ，然后 Iplayable 平台会根据下游发送的点击以及上游或三方传来的安装数据填充 postback url ，最后 IPlayable 平台会使用填充后的 postback url 进行get请求，**示例如下：**
+在进行安装回传时，需要三步，首先需要在 Iplayable 平台配置 postback url ，然后 Iplayable 平台会根据下游发送的点击以及上游或三方传来的回调数据提取宏参，最后 IPlayable 平台会使用提取的填充 postback url 使用填充后的 postback url 对下游进行get请求，**示例如下：**
 
 ### a. Iplayable 系统配置postback url，例如：
 
@@ -187,7 +187,7 @@ http://callback.flatmobi.com/our_rout?our_click_param=123&istall_time=2023-11-11
 | {para1} | somevalue1 |
 | {para2} | somevalue2 |
 
-### c. Iplayable 使用步骤 b 提取到的宏参填充步骤a中配置的 postback url ，并使用填充后的 url 进行 get 请求，填充结果如下：
+### c. Iplayable 平台系统使用步骤 b 提取到的宏参填充步骤a中配置的 postback url ，并使用填充后的 url 进行 get 请求，填充结果如下：
 
 http://your.domain.com/your/route?your_click_para=abc&your_aff_para=1000&your_camp_para=22&your_blockreason_para=test1&your_payout_para=1.5&&other_fix=fixvalue&other_fix2=fixvalue2&your_name=somevalue1
 
