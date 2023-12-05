@@ -89,7 +89,7 @@ http://callback.flatmobi.com/api/v1/getoffer?app_id=1000&app_key=098f6bcd4621d37
 | price | float32 | Offer 单价 |
 | pricing_models | string | 计费事件 CPI 等 |
 
-## 4. Click_url 参数说明
+## 4. Click_url 配置说明
 
 发送get请求，请求地址：
 ```bash
@@ -164,13 +164,13 @@ Postback url注解：
 
 b. 从下游发送的的 Click_url 以及 Iplayable 网盟平台从上游或者三方回调提取宏参，例如：
 
-Iplayable 平台接收到下游发送的的 Click_url 如第4步所示：
+Iplayable 平台接收到下游发送的 Click_url 如第4步所示：
 
 http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&clickid=abc&gaid=4716d154-7232-11ee-800e-e9037848532a&android={android}&idfa={idfa}&subid={subid}&affsub=testabc&para1=somevalue1&para2=somevalue2
 
 Iplayable 平台接收到的上游或者三方回传的安装：
 
-http://www.our.domain/our_rout?our_click_param=123&istall_time=2023-11-11&block_reason=test1&payout=1.5
+http://callback.flatmobi.com/our_rout?our_click_param=123&istall_time=2023-11-11&block_reason=test1&payout=1.5
 
 继而提取到宏参如下：
 
