@@ -4,13 +4,17 @@
 
 ## 2. 对接下游
 
-### 2.1 配置 click_url
-发送get请求，请求地址：
-```bash
-http://callback.flatmobi.com/api/v1/click
-```
+运营需要配置两项内容，分别为 click_url 和 postback_url 。
 
-支持的点击请求参数：
+### 2.1 配置 click_url
+
+该配置的 click_url 为下游在从 Iplayable 平台拉取 offer 单子时获取到的点击链接，详情可见 Downstream_Doc.md 文档。填写的数据库位置为 downstream 表的 click_pattern 字段。
+
+click_pattern 字段填写示例：
+
+http://callback.flatmobi.com/api/v1/getoffer?app_id={app_id}&offer_id={offer_id}&clickid={clickid}&gaid={gaid}&android={android}&idfa={idfa}&subid={subid}&affsub={affsub}
+
+支持的点击请求的参数：
 
 | 字段名称 | 对应宏参 | 参数说明 | 是否必须 |
 | -------- | ------ | -------- | ------ |
@@ -26,19 +30,15 @@ http://callback.flatmobi.com/api/v1/click
 | para2 | {para2} | 自定义参数2 | 否 |
 | para3 | {para3} | 自定义参数3 | 否 |
 
-示例：
+注：para1、para2、para3 为预留自定义参数，若需要在 postback 中回传一些额外内容可在此添加，添加格式如下方示例 url ，并需要 Iplayable 平台运营在 postback_url 中进行相关配置，配置细节将在 2.2 节中说明。
 
-在第3步查询 offer 响应内容示例中datas字段中的 click_url 为 ：
-
-http://callback.flatmobi.com/api/v1/getoffer?app_id=1000&offer_id=22&clickid={clickid}&gaid={gaid}&android={android}&idfa={idfa}&subid={subid}&affsub={affsub}
-
-点击上报时将 {click_id}，{gaid} 等替换为自己渠道的宏，替换后发送给 Iplayable 网盟平台，例如 ：
+点击上报时将 {click_id}，{gaid} 等由下游进行替换，替换后发送给 Iplayable 网盟平台，例如 ：
 
 http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&clickid=abc&gaid=4716d154-7232-11ee-800e-e9037848532a&android={android}&idfa={idfa}&subid={subid}&affsub=testabc&para1=somevalue1&para2=somevalue2
 
-注：para1、para2、para3 为预留自定义参数，若需要在 postback 中回传一些额外内容可在此添加，添加格式如上方示例 url ，并与 Iplayable 平台客户经理联系在 postback 中配置，配置细节将在第 5 节中说明。
+注：没有使用宏替换的参数表示下游不提供该参数。
 
-
+### 2.2 配置 postback_url
 
 Iplayable 网盟平台支持的回调链接宏参数：
 
@@ -100,7 +100,7 @@ http://callback.flatmobi.com/our_rout?our_click_param=123&istall_time=2023-11-11
 | {para1} | somevalue1 |
 | {para2} | somevalue2 |
 
-c. Iplayable 使用步骤 b 提取到的宏参填充步骤a中配置的 postback url ，并使用填充后的 url 进行 get 请求，填充结果如下：
+c. Iplayable 使用步骤 b 提取到的宏参填充步骤a中配置的 postback url ，并使用填充后的 url 进行 get 请求，填充结果示例如下：
 
 http://your.domain.com/your/route?your_click_para=abc&your_aff_para=1000&your_camp_para=22&your_blockreason_para=test1&your_payout_para=1.5&&other_fix=fixvalue&other_fix2=fixvalue2&your_name=somevalue1
 

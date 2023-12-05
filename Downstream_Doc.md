@@ -158,7 +158,7 @@ Iplayable 网盟平台支持的回调链接宏参数：
 
 http://your.domain.com/your/route?your_click_para={clickid}&your_aff_para={app_id}&your_camp_para={offer_id}&your_blockreason_para={breason}&your_payout_para={payout}&other_fix=fixvalue&other_fix2=fixvalue2&your_name={para1}
 
-Postback url注解：
+**Postback url注解：**
 
 在真实生产环境中配置时，请将 your.domain.com、your/route 替换为自己的回调主域名和路径；your_click_para、your_aff_para、your_camp_para、your_blockreason_para、your_payout_para 请替换为自己的参数名；other_fix、other_fix2 为可配置的固定回传参数，配置时请替换为自己的固定参数名称；your_name 为第 4 步中接收到的预留自定义参数，请替换为自己的自定义参数名称；
 
