@@ -86,7 +86,32 @@ Iplayable 的运营人员配置好 downstream 表的 click_pattern 和 postback_
 
 ## 3. 对接上游/三方
 
+### 3.1 对接上游
 
+#### 3.1.1 offer 拉取 url 配置
+
+支持的宏参：
+
+| Placeholder | Description          | 是否必须 |
+| ----------- | -------------------- | --------｜
+| affname     | 账户名               | 是 |
+| afftoken    | 密码                 | 是 |
+| osup        | 大写的操作系统 IOS ANDROID | 否 |
+| oslo        | 小写的操作系统 ios android | 否 |
+| cc2lo       | 2位小写countrycode   | 否 |
+| cc3lo       | 3位小写countrycode   | 否 |
+| cc2up       | 2位大写countrycode   | 否 |
+| cc3up       | 3位大写countrycode   | 否 |
+
+**示例：**
+
+假设，上游的域名和路由为some.upstream.domain.com、getoffer；上游接收账户名的参数名为aff_id；上游接收密码的参数名为aff_token；上游接收操作系统平台的参数名为platform，并且接收的参数值是小写的操作系统；上游接收国家的参数名为countries，并且接收的参数值是2位大写格式，运营需要进行如下配置：
+
+http://some.upstream.domain.com/getoffer?aff_id={affname}&aff_token={afftoken}&platform={oslo}&countries={cc2up}
+
+其中{oslo}、{cc2up}实际中需要使用的 placeholder 请与上游沟通后并参考上述表格。
+
+### 3.2 对接三方
 
 
 
