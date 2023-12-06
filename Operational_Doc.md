@@ -30,19 +30,19 @@ http://callback.flatmobi.com/api/v1/getoffer?app_id={app_id}&offer_id={offer_id}
 | para2 | {para2} | 自定义参数2 | 否 |
 | para3 | {para3} | 自定义参数3 | 否 |
 
-**注：**para1、para2、para3 为预留自定义参数，若下游需要在 postback 中回传一些额外内容可在此添加，添加格式如下方示例 url ，并需要 Iplayable 平台运营在 postback_url 中进行相关配置，配置细节将在 2.2 节中说明。
+**注：** para1、para2、para3 为预留自定义参数，若下游需要在 postback 中回传一些额外内容可在此添加，添加格式如下方示例 url ，并需要 Iplayable 平台运营在 postback_url 中进行相关配置，配置细节将在 2.2 节中说明。
 
 点击上报时将 {click_id}，{gaid} 等由下游进行替换，替换后发送给 Iplayable 网盟平台，例如 ：
 
 http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&clickid=abc&gaid=4716d154-7232-11ee-800e-e9037848532a&android={android}&idfa={idfa}&subid={subid}&affsub=testabc&para1=somevalue1&para2=somevalue2
 
-**注：**没有使用宏替换的参数表示下游不提供该参数。
+**注：** 没有使用宏替换的参数表示下游不提供该参数。
 
 ### 2.2 配置 postback_url
 
 这里配置的 postback_url 为 Iplayable 平台需要回传给下游的信息，填写位置为 downstream 表的 postback_url 字段。
 
-postback_url 字段填写示例：
+**postback_url 字段填写示例：**
 
 http://some.downstream.domain.com/postback?your_click_para={clickid}&your_aff_para={app_id}&your_camp_para={offer_id}&your_blockreason_para={breason}&your_payout_para={payout}&other_fix=fixvalue&other_fix2=fixvalue2&down_para_name={para1}
 
@@ -79,7 +79,7 @@ http://www.baidu.com/postback?click={clickid}&aff={app_id}&camp={offer_id}&block
 | {evalue} | 后链路事件value | 否 |
 | {payout} | Offer 收益，货币为美金 | 否 |
 
-**注：**仅支持以上宏参
+**注：** 仅支持以上宏参
 
 Iplayable 的运营人员配置好 downstream 表的 click_pattern 和 postback_url 字段后就完成了对下游的 url 配置对接工作。文档尾部的**附录1**会对与下游实际的交互细节举例说明。
 
