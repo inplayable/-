@@ -96,14 +96,16 @@ http://callback.flatmobi.com/api/v1/getoffer?app_id=1000&app_key=098f6bcd4621d37
 http://callback.flatmobi.com/api/v1/click
 ```
 
-点击请求参数：
+点击链接查询参数支持：
 
-| 字段名称 | 宏参 | 参数说明 | 是否必须 |
+| 参数名称 | 宏参 | 参数说明 | 是否必须 |
 | -------- | ------ | -------- | ------ |
 | app_id | {app_id} | 渠道 id | 是 |
 | offer_id | {offer_id} | offerid | 是 |
 | gaid | {gaid} | 谷歌广告 ID | android系统必传 |
 | idfa | {idfa} | IOS idfa | ios系统必传 |
+
+**注：**点击链接中的查询参数的名称和宏参必须对应，并且不支持更改。
 
 **示例：**
 
