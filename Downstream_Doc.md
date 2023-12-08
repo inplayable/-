@@ -105,7 +105,7 @@ http://callback.flatmobi.com/api/v1/click
 | gaid | {gaid} | 谷歌广告 ID | android系统必传 |
 | idfa | {idfa} | IOS idfa | ios系统必传 |
 
-**注：**点击链接中的查询参数的名称和宏参必须对应，并且不支持更改。
+**注：** 点击链接中的查询参数的名称和宏参必须对应，并且不支持更改。
 
 **示例：**
 
@@ -160,6 +160,8 @@ Iplayable 网盟平台支持的回调链接宏参：
 
 **d.** 其他宏参
 
+| 宏参 | 参数说明 | 是否必须 |
+| --- | ------- | ------- |
 | {payout} | Offer 收益，货币为美金 | 否 |
 
 
@@ -169,15 +171,13 @@ Iplayable 网盟平台支持的回调链接宏参：
 
 http://your.domain.com/your/route?your_aff_para={app_id}&your_camp_para={campaign_id}&your_gaid_para={gaid}&your_blockreason_para={breason}&your_payout_para={payout}&other_fix=fixvalue
 
-**注：**
-
-请将 your.domain.com、your/route 替换为自己的真实回调域名和路径；your_aff_para、your_camp_para、your_gaid_para、your_blockreason_para、your_payout_para 请替换为自己的查询参数名称；other_fix为可配置的固定回传参数，配置时请替换为自己的固定查询参数名称，并配置固定查询参数值。
+**注：** 请将 your.domain.com、your/route 替换为自己的真实回调域名和路径；your_aff_para、your_camp_para、your_gaid_para、your_blockreason_para、your_payout_para 请替换为自己的查询参数名称；other_fix为可配置的固定回传参数，配置时请替换为自己的固定查询参数名称，并配置固定查询参数值。
 
 **后链路事件回调链接示例：**
 
 http://your.domain.com/your/route?your_aff_para={app_id}&your_camp_para={campaign_id}&your_gaid_para={gaid}&your_eventname_para={breason}&your_payout_para={payout}&other_fix=fixvalue
 
-**注：**替换逻辑同安装回调链接示例。
+**注：** 替换逻辑同安装回调链接示例。
 
 <!-- 在进行安装回传时，需要三步，首先需要在 Iplayable 平台配置 postback url ，然后 Iplayable 平台会根据下游发送的点击以及上游或三方传来的回调数据提取宏参，最后 IPlayable 平台会使用提取的填充 postback url 使用填充后的 postback url 对下游进行get请求，**示例如下：**
 
