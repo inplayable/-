@@ -16,9 +16,9 @@ http://callback.flatmobi.com/api/v1/getoffer
 | -------- | -------- | ---- | -------- |
 | app_id | 渠道 ID，分配给渠道的唯一标识 | 50 | 是 |
 | app_key | 请求 KEY，验证请求的合法性（32位长度字符串） | 098f6bcd4621d373cade4e832627b4f6 | 是 |
-| countries | Offer 国家，支持大小写，多值使用逗号隔开 | ID,TH,HK | 否 |
+| countries | Offer 国家，支持大小写，两位字符国家简写，多值使用逗号隔开 | ID,TH,hk | 否 |
 | platform | Offer 操作系统，支持大小写，多值使用逗号隔开 | android,ios | 否 |
-| price_type | Offer 出价类型，支持大小写，多值使用逗号隔开 | CPM,CPC,CPI,CPE | 否 |
+| price_type | Offer 出价类型，支持大小写，多值使用逗号隔开 | CPM,CPC,cpi,CPE | 否 |
 
 
 查询 offer API 调用示例（测试的 API，接入的正式 API 需要申请 app_id 和 app_key）:
