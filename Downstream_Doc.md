@@ -1,6 +1,6 @@
 # Iplayable网盟平台下游对接文档
 ## 1. 概要
-本API文档包括线上调用Iplayable网盟平台Offer List的API方法，响应实例，点击传入以及跟踪回掉参数的配置信息
+本API文档包括线上调用Iplayable网盟平台Offer List的API方法，响应示例，点击传入以及跟踪回掉参数的配置信息
 
 ## 2. 查询 offer
 
@@ -52,7 +52,7 @@ http://callback.flatmobi.com/api/v1/getoffer?app_id=1000&app_key=098f6bcd4621d37
         {
             "app_name": "MOXA_id_android",
             "app_pkg": "id.moxa",
-            "click_url": "http://callback.flatmobi.com/api/v1/getoffer?app_id=1000&offer_id=22&clickid={clickid}&gaid={gaid}&idfa={idfa}",
+            "click_url": "http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&clickid={clickid}&gaid={gaid}&idfa={idfa}",
             "countries": [
                 "IDN",
             ],
@@ -118,28 +118,37 @@ http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&gaid=4716d154-
 <!-- 注：para1、para2、para3 为预留自定义参数，若需要在 postback 中回传一些额外内容可在此添加，添加格式如上方示例 url ，并与 Iplayable 平台客户经理联系在 postback 中配置，配置细节将在第 5 节中说明。 -->
 
 
+
+
 ## 5. Postback 配置说明
 
-Iplayable 网盟平台支持的回调链接宏参数：
+Iplayable 网盟平台支持的回调链接宏参：
 
 | 宏参 | 参数说明 | 是否必须 |
 | --- | ------- | ------- |
-| {clickid} | 点击id，下游渠道生成的click id ，安装的唯一标识 | 是 |
-| {app_id} | 渠道 ID，分配给渠道的唯一标识 | 否 |
-| {offer_id} | 单子唯一标识 | 否 |
+| {aff_id} | 渠道 ID，分配给渠道的唯一标识 | 否 |
+| {campaign_id} | 单子唯一标识 | 否 |
 | {gaid} | 谷歌广告 ID | 否 |
 | {idfa} | IOS idfa | 否 |
-| {insts} | 安装时间戳 | 否 |
-| {breason} | Block reason | 否 |
-| {bsub} | Block sub reason | 否 |
-| {bvalue} | Block value | 否 |
-| {ename} | 后链路事件，注册或者付费等 | 否 |
-| {erev} | 后链路事件收益 | 否 |
-| {etime} | 后链路事件时间戳 | 否 |
-| {evalue} | 后链路事件value | 否 |
+| {insts} | 安装时间戳，仅支持安装事件回传 | 否 |
+| {breason} | Block reason，仅支持安装事件回传 | 否 |
+| {bsub} | Block sub reason，仅支持安装事件回传 | 否 |
+| {bvalue} | Block value | 否，仅支持安装事件回传 |
+| {ename} | 后链路事件，注册或者付费等，仅支持后链路事件回传 | 否 |
+| {erev} | 后链路事件收益，仅支持后链路事件回传 | 否 |
+| {etime} | 后链路事件时间戳，仅支持后链路事件回传 | 否 |
+| {evalue} | 后链路事件value，仅支持后链路事件回传 | 否 |
 | {payout} | Offer 收益，货币为美金 | 否 |
 
-在进行安装回传时，需要三步，首先需要在 Iplayable 平台配置 postback url ，然后 Iplayable 平台会根据下游发送的点击以及上游或三方传来的回调数据提取宏参，最后 IPlayable 平台会使用提取的填充 postback url 使用填充后的 postback url 对下游进行get请求，**示例如下：**
+**回调链接示例：**
+
+http://your.domain.com/your/route?your_aff_para={app_id}&your_camp_para={campaign_id}&your_gaid_para={gaid}&your_blockreason_para={breason}&your_payout_para={payout}&other_fix=fixvalue
+
+**注：**
+
+请将 your.domain.com、your/route 替换为自己的真实回调域名和路径；your_aff_para、your_camp_para、your_gaid_para、your_blockreason_para、your_payout_para 请替换为自己的查询参数名称；other_fix为可配置的固定回传参数，配置时请替换为自己的固定查询参数名称，并配置固定查询参数值；
+
+<!-- 在进行安装回传时，需要三步，首先需要在 Iplayable 平台配置 postback url ，然后 Iplayable 平台会根据下游发送的点击以及上游或三方传来的回调数据提取宏参，最后 IPlayable 平台会使用提取的填充 postback url 使用填充后的 postback url 对下游进行get请求，**示例如下：**
 
 ### a. Iplayable 系统配置postback url，例如：
 
@@ -176,6 +185,6 @@ http://callback.flatmobi.com/our_rout?our_click_param=123&istall_time=2023-11-11
 
 ### c. Iplayable 平台系统使用步骤 b 提取到的宏参填充步骤a中配置的 postback url ，并使用填充后的 url 进行 get 请求，填充结果如下：
 
-http://your.domain.com/your/route?your_click_para=abc&your_aff_para=1000&your_camp_para=22&your_blockreason_para=test1&your_payout_para=1.5&&other_fix=fixvalue&other_fix2=fixvalue2&your_name=somevalue1
+http://your.domain.com/your/route?your_click_para=abc&your_aff_para=1000&your_camp_para=22&your_blockreason_para=test1&your_payout_para=1.5&&other_fix=fixvalue&other_fix2=fixvalue2&your_name=somevalue1 -->
 
 
