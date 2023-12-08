@@ -109,15 +109,15 @@ http://callback.flatmobi.com/api/v1/click
 | para2 | {para2} | 自定义参数2 | 否 |
 | para3 | {para3} | 自定义参数3 | 否 |
 
-示例：
+**示例：**
 
-在第3步查询 offer 响应内容示例中datas字段中的 click_url 为 ：
+假设在第3步查询 offer 响应内容示例中datas字段中的 click_url 为 ：
 
-http://callback.flatmobi.com/api/v1/getoffer?app_id=1000&offer_id=22&clickid={clickid}&gaid={gaid}&android={android}&idfa={idfa}&subid={subid}&affsub={affsub}
+http://callback.flatmobi.com/api/v1/getoffer?app_id=1000&offer_id=22&clickid={clickid}&gaid={gaid}&idfa={idfa}
 
-点击上报时将 {click_id}，{gaid} 等替换为自己渠道的宏，替换后发送给 Iplayable 网盟平台，例如 ：
+其中app_id 和 offer_id 参数的值为 Iplayable 网盟平台进行填写，clickid、gaid、idfa 参数的值为下游进行填写替换，替换为对应值后发送给 Iplayable 网盟平台，例如下游填写后发送给 Iplayable 网盟平台的内容应为 ：
 
-http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&clickid=abc&gaid=4716d154-7232-11ee-800e-e9037848532a&android={android}&idfa={idfa}&subid={subid}&affsub=testabc&para1=somevalue1&para2=somevalue2
+http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&clickid=abc&gaid=4716d154-7232-11ee-800e-e9037848532a&idfa={idfa}
 
 注：para1、para2、para3 为预留自定义参数，若需要在 postback 中回传一些额外内容可在此添加，添加格式如上方示例 url ，并与 Iplayable 平台客户经理联系在 postback 中配置，配置细节将在第 5 节中说明。
 
