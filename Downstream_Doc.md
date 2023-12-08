@@ -98,7 +98,7 @@ http://callback.flatmobi.com/api/v1/click
 
 点击请求参数：
 
-| 字段名称 | 对应宏参 | 参数说明 | 是否必须 |
+| 字段名称 | 宏参 | 参数说明 | 是否必须 |
 | -------- | ------ | -------- | ------ |
 | app_id | {app_id} | 渠道 id | 是 |
 | offer_id | {offer_id} | offerid | 是 |
@@ -124,29 +124,58 @@ http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&gaid=4716d154-
 
 Iplayable 网盟平台支持的回调链接宏参：
 
+**a.**
+
 | 宏参 | 参数说明 | 是否必须 |
 | --- | ------- | ------- |
 | {aff_id} | 渠道 ID，分配给渠道的唯一标识 | 否 |
 | {campaign_id} | 单子唯一标识 | 否 |
 | {gaid} | 谷歌广告 ID | 否 |
 | {idfa} | IOS idfa | 否 |
+
+**注：** Iplayable 网盟平台支持将点击请求的的信息回传给下游。宏参{aff_id}、{campaign_id}、{gaid}、{idfa} 对应的值来源于下游发送的 click_url ，见第4节，分别对应第 4 节中的宏参 {app_id} 、 {offer_id}、{gaid}、{idfa}。
+
+**b.**
+
+| 宏参 | 参数说明 | 是否必须 |
+| --- | ------- | ------- |
 | {insts} | 安装时间戳，仅支持安装事件回传 | 否 |
 | {breason} | Block reason，仅支持安装事件回传 | 否 |
 | {bsub} | Block sub reason，仅支持安装事件回传 | 否 |
-| {bvalue} | Block value | 否，仅支持安装事件回传 |
+| {bvalue} | Block value，仅支持安装事件回传 | 否 |
+
+**注：**该部分宏参对应的值来自于上游/三方的安装回调，因此仅支持安装事件回传。
+
+**c.**
+
+| 宏参 | 参数说明 | 是否必须 |
+| --- | ------- | ------- |
 | {ename} | 后链路事件，注册或者付费等，仅支持后链路事件回传 | 否 |
 | {erev} | 后链路事件收益，仅支持后链路事件回传 | 否 |
 | {etime} | 后链路事件时间戳，仅支持后链路事件回传 | 否 |
 | {evalue} | 后链路事件value，仅支持后链路事件回传 | 否 |
+
+
+**d.** 其他宏参
+
 | {payout} | Offer 收益，货币为美金 | 否 |
 
-**回调链接示例：**
+
+
+
+**安装回调链接示例：**
 
 http://your.domain.com/your/route?your_aff_para={app_id}&your_camp_para={campaign_id}&your_gaid_para={gaid}&your_blockreason_para={breason}&your_payout_para={payout}&other_fix=fixvalue
 
 **注：**
 
-请将 your.domain.com、your/route 替换为自己的真实回调域名和路径；your_aff_para、your_camp_para、your_gaid_para、your_blockreason_para、your_payout_para 请替换为自己的查询参数名称；other_fix为可配置的固定回传参数，配置时请替换为自己的固定查询参数名称，并配置固定查询参数值；
+请将 your.domain.com、your/route 替换为自己的真实回调域名和路径；your_aff_para、your_camp_para、your_gaid_para、your_blockreason_para、your_payout_para 请替换为自己的查询参数名称；other_fix为可配置的固定回传参数，配置时请替换为自己的固定查询参数名称，并配置固定查询参数值。
+
+**后链路事件回调链接示例：**
+
+http://your.domain.com/your/route?your_aff_para={app_id}&your_camp_para={campaign_id}&your_gaid_para={gaid}&your_eventname_para={breason}&your_payout_para={payout}&other_fix=fixvalue
+
+**注：**替换逻辑同安装回调链接示例。
 
 <!-- 在进行安装回传时，需要三步，首先需要在 Iplayable 平台配置 postback url ，然后 Iplayable 平台会根据下游发送的点击以及上游或三方传来的回调数据提取宏参，最后 IPlayable 平台会使用提取的填充 postback url 使用填充后的 postback url 对下游进行get请求，**示例如下：**
 
