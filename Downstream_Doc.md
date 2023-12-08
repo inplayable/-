@@ -16,7 +16,7 @@ http://callback.flatmobi.com/api/v1/getoffer
 | -------- | -------- | ---- | -------- |
 | app_id | 渠道 ID，分配给渠道的唯一标识 | 50 | 是 |
 | app_key | 请求 KEY，验证请求的合法性（32位长度字符串） | 098f6bcd4621d373cade4e832627b4f6 | 是 |
-| countries | Offer 国家，支持大小写，两位字符国家简写，多值使用逗号隔开 | ID,TH,HK | 否 |
+| countries | Offer 国家，支持大小写，多值使用逗号隔开 | ID,TH,HK | 否 |
 | platform | Offer 操作系统，支持大小写，多值使用逗号隔开 | android,ios | 否 |
 | price_type | Offer 出价类型，支持大小写，多值使用逗号隔开 | CPM,CPC,CPI,CPE | 否 |
 
@@ -37,7 +37,7 @@ http://callback.flatmobi.com/api/v1/getoffer?app_id=1000&app_key=098f6bcd4621d37
         {
             "app_name": "Dream Wars",
             "app_pkg": "com.mmosea.android.dreamwars",
-            "click_url": "http://callback.flatmobi.com/api/v1/getoffer?app_id=1000&offer_id=46&clickid={clickid}&gaid={gaid}&android={android}&idfa={idfa}&subid={subid}&affsub={affsub}",
+            "click_url": "http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=46&clickid={clickid}&gaid={gaid}&idfa={idfa}",
             "countries": [],
             "daily_cap": 100,
             "id": "46",
@@ -52,7 +52,7 @@ http://callback.flatmobi.com/api/v1/getoffer?app_id=1000&app_key=098f6bcd4621d37
         {
             "app_name": "MOXA_id_android",
             "app_pkg": "id.moxa",
-            "click_url": "http://callback.flatmobi.com/api/v1/getoffer?app_id=1000&offer_id=22&clickid={clickid}&gaid={gaid}&android={android}&idfa={idfa}&subid={subid}&affsub={affsub}",
+            "click_url": "http://callback.flatmobi.com/api/v1/getoffer?app_id=1000&offer_id=22&clickid={clickid}&gaid={gaid}&idfa={idfa}",
             "countries": [
                 "IDN",
             ],
@@ -105,9 +105,6 @@ http://callback.flatmobi.com/api/v1/click
 | clickid | {clickid} | 下游渠道生成的click id | 是 |
 | gaid | {gaid} | 谷歌广告 ID | android系统必传 |
 | idfa | {idfa} | IOS idfa | ios系统必传 |
-| android | {android} | android信息 | 否 |
-| affsub | {affsub} | 子渠道信息 | 否 |
-| subid | {subid} | 子渠道 id | 否 |
 | para1 | {para1} | 自定义参数1 | 否 |
 | para2 | {para2} | 自定义参数2 | 否 |
 | para3 | {para3} | 自定义参数3 | 否 |
@@ -132,16 +129,10 @@ Iplayable 网盟平台支持的回调链接宏参数：
 | 宏参 | 参数说明 | 是否必须 |
 | --- | ------- | ------- |
 | {clickid} | 点击id，下游渠道生成的click id ，安装的唯一标识 | 是 |
-| {app_id} | 渠道 ID，分配给渠道的唯一标识 | 是 |
-| {offer_id} | 单子唯一标识 | 是 |
-| {gaid} | 谷歌广告 ID | android系统必传 |
-| {idfa} | IOS idfa | ios系统必传 |
-| {android} | android信息 | 否 |
-| {affsub} | 子渠道信息 | 否 |
-| {subid} | 子渠道 id | 否 |
-| {para1} | 自定义参数1 | 否 |
-| {para2} | 自定义参数2 | 否 |
-| {para3} | 自定义参数3 | 否 |
+| {app_id} | 渠道 ID，分配给渠道的唯一标识 | 否 |
+| {offer_id} | 单子唯一标识 | 否 |
+| {gaid} | 谷歌广告 ID | 否 |
+| {idfa} | IOS idfa | 否 |
 | {insts} | 安装时间戳 | 否 |
 | {breason} | Block reason | 否 |
 | {bsub} | Block sub reason | 否 |

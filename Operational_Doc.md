@@ -4,15 +4,31 @@
 
 ## 2. 对接下游
 
-运营需要配置两项内容，分别为 click_url 和 postback_url 。
+运营需要配置两项内容，分别为 click_pattern 和 postback_url 。
 
-### 2.1 配置 click_url
+### 2.1 配置 click_pattern
 
-该配置的 click_url 为下游在从 Iplayable 平台拉取 offer 单子时获取到的点击链接，详情可见 Downstream_Doc.md 文档。填写的数据库位置为 downstream 表的 click_pattern 字段。
+该配置的 click_pattern 为下游在从 Iplayable 平台拉取 offer 单子时获取到的点击链接，详情可见 Downstream_Doc.md 文档。填写的数据库位置为 downstream 表的 click_pattern 字段。
 
 click_pattern 字段填写示例：
 
-http://callback.flatmobi.com/api/v1/getoffer?app_id={app_id}&offer_id={offer_id}&clickid={clickid}&gaid={gaid}&android={android}&idfa={idfa}&subid={subid}&affsub={affsub}
+http://callback.flatmobi.com/api/v1/getoffer?app_id={app_id}&offer_id={offer_id}&clickid={click_id}&gaid={gaid}&idfa={idfa}
+
+<!-- **注：**
+
+a. 其中参数部分的参数名可以取任何名字，但需要和 2.2 节中配置的 postback_url 参数部分的参数值（宏）对应，例如：
+
+| click_pattern 不同参数名 | click_pattern 配置 | postback_url 对应配置 |
+| ---------------------- | ----------------- | -------------------- |
+| 参数名为 offerid 时 | offerid={offer_id} | camp={offerid} |
+| 参数名为 campid 时  | campid={offer_id} | camp={campid} |
+
+b.  参数部分的参数值（宏）需要替换为下游渠道的宏，例如： -->
+
+<!-- | 参数名 | click_pattern 配置的宏 | postback_url 对应配置 |
+| ---------------------- | ----------------- | -------------------- |
+| offerid | offerid={offer_id} | camp={offer_id} |
+| offerid | offerid={camp_id} | camp={camp_id} |  -->
 
 **Iplayable 平台支持的点击请求的参数：**
 
@@ -20,21 +36,19 @@ http://callback.flatmobi.com/api/v1/getoffer?app_id={app_id}&offer_id={offer_id}
 | -------- | ------ | -------- | ------ |
 | app_id | {app_id} | 渠道 id | 是 |
 | offer_id | {offer_id} | offerid | 是 |
-| clickid | {clickid} | 下游渠道生成的click id | 是 |
+| clickid | {click_id} | 下游渠道生成的click id | 是 |
 | gaid | {gaid} | 谷歌广告 ID | android系统必传 |
 | idfa | {idfa} | IOS idfa | ios系统必传 |
-| android | {android} | android信息 | 否 |
-| affsub | {affsub} | 子渠道信息 | 否 |
-| subid | {subid} | 子渠道 id | 否 |
-| para1 | {para1} | 自定义参数1 | 否 |
-| para2 | {para2} | 自定义参数2 | 否 |
-| para3 | {para3} | 自定义参数3 | 否 |
+| para1 | {paraa} | 自定义参数1 | 否 |
+| para2 | {parab} | 自定义参数2 | 否 |
+| para3 | {parac} | 自定义参数3 | 否 |
 
-**注：** para1、para2、para3 为预留自定义参数，若下游需要在 postback 中回传一些额外内容可在此添加，添加格式如下方示例 url ，并需要 Iplayable 平台运营在 postback_url 中进行相关配置，配置细节将在 2.2 节中说明。
+**注：** 其中字段名称不能改变，宏也不能改变，并且两者需要对应。
+para1、para2、para3 为预留自定义参数，若下游需要在 postback 中回传一些额外内容可在此添加，添加格式如下方示例 url ，并需要 Iplayable 平台运营在 postback_url 中进行相关配置，配置细节将在 2.2 节中说明。
 
-点击上报时将 {click_id}，{gaid} 等由下游进行替换，替换后发送给 Iplayable 网盟平台，例如 ：
+下游在进行点击上报时将 {click_id}，{gaid} 等由下游进行替换，替换后发送给 Iplayable 网盟平台，例如 ：
 
-http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&clickid=abc&gaid=4716d154-7232-11ee-800e-e9037848532a&android={android}&idfa={idfa}&subid={subid}&affsub=testabc&para1=somevalue1&para2=somevalue2
+http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&clickid=abc&gaid=4716d154-7232-11ee-800e-e9037848532a&para1=somevalue1&para2=somevalue2
 
 **注：** 没有使用宏替换的参数表示下游不提供该参数。
 
@@ -44,7 +58,7 @@ http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&clickid=abc&ga
 
 **postback_url 字段填写示例：**
 
-http://some.downstream.domain.com/postback?your_click_para={clickid}&your_aff_para={app_id}&your_camp_para={offer_id}&your_blockreason_para={breason}&your_payout_para={payout}&other_fix=fixvalue&other_fix2=fixvalue2&down_para_name={para1}
+http://some.downstream.domain.com/postback?your_click_para={clickid}&your_aff_para={appid}&your_camp_para={offerid}&your_blockreason_para={breason}&your_payout_para={payout}&other_fix=fixvalue&other_fix2=fixvalue2&down_para_name={para1}
 
 **postback_url 注解：**
 
