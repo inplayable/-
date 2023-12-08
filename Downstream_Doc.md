@@ -109,7 +109,7 @@ http://callback.flatmobi.com/api/v1/click
 
 点击跟踪链接示例 ：
 
-http://callback.flatmobi.com/api/v1/getoffer?app_id=1000&offer_id=22&&gaid={gaid}&idfa={idfa}
+http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&&gaid={gaid}&idfa={idfa}
 
 其中app_id 和 offer_id 查询参数的值为 Iplayable 网盟平台进行填写，填写后在下游查询offer时返回，请看第3节；clickid、gaid、idfa 查询参数的值为下游进行填写替换，替换为对应值后发送给 Iplayable 网盟平台，例如下游填写后发送给 Iplayable 网盟平台的内容应为以下**示例** ：
 
