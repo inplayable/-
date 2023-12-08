@@ -126,7 +126,7 @@ http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&gaid=4716d154-
 
 Iplayable 网盟平台支持的回调链接宏参：
 
-**a.**
+**a.** 点击链接参数回传
 
 | 宏参 | 参数说明 | 是否必须 |
 | --- | ------- | ------- |
@@ -137,7 +137,7 @@ Iplayable 网盟平台支持的回调链接宏参：
 
 **注：** Iplayable 网盟平台支持将点击请求的的信息回传给下游。宏参{aff_id}、{campaign_id}、{gaid}、{idfa} 对应的值来源于下游发送的 click_url ，见第4节，分别对应第 4 节中的宏参 {app_id} 、 {offer_id}、{gaid}、{idfa}。
 
-**b.**
+**b.** 安装信息回传
 
 | 宏参 | 参数说明 | 是否必须 |
 | --- | ------- | ------- |
@@ -146,9 +146,9 @@ Iplayable 网盟平台支持的回调链接宏参：
 | {bsub} | Block sub reason，仅支持安装事件回传 | 否 |
 | {bvalue} | Block value，仅支持安装事件回传 | 否 |
 
-**注：**该部分宏参对应的值来自于上游/三方的安装回调，因此仅支持安装事件回传。
+**注：**该部分宏参对应的值来自于上游/三方的安装回调，因此仅支持安装事件的回传。
 
-**c.**
+**c.** 后链路事件实习回传
 
 | 宏参 | 参数说明 | 是否必须 |
 | --- | ------- | ------- |
@@ -157,14 +157,13 @@ Iplayable 网盟平台支持的回调链接宏参：
 | {etime} | 后链路事件时间戳，仅支持后链路事件回传 | 否 |
 | {evalue} | 后链路事件value，仅支持后链路事件回传 | 否 |
 
+**注：**该部分宏参对应的值来自于上游/三方的后链路事件回调，因此仅支持后链路事件的回传。
 
 **d.** 其他宏参
 
 | 宏参 | 参数说明 | 是否必须 |
 | --- | ------- | ------- |
 | {payout} | Offer 收益，货币为美金 | 否 |
-
-
 
 
 **安装回调链接示例：**
@@ -175,7 +174,7 @@ http://your.domain.com/your/route?your_aff_para={app_id}&your_camp_para={campaig
 
 **后链路事件回调链接示例：**
 
-http://your.domain.com/your/route?your_aff_para={app_id}&your_camp_para={campaign_id}&your_gaid_para={gaid}&your_eventname_para={breason}&your_payout_para={payout}&other_fix=fixvalue
+http://your.domain.com/your/route?your_aff_para={app_id}&your_camp_para={campaign_id}&your_gaid_para={gaid}&your_eventname_para={ename}&your_payout_para={payout}&other_fix=fixvalue
 
 **注：** 替换逻辑同安装回调链接示例。
 
