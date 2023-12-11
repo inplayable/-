@@ -180,7 +180,15 @@ Iplayable 的运营人员配置好 downstream 表的 click_pattern 和 postback_
 
 | Placeholder | Description | 是否必须 |
 | --- | ------- | ------- |
-| {payout} | Offer 收益，货币为美金 | 否 |
+| affname | 账户名 | 是 |
+| afftoken | 密码 | 是 |
+| osup | O小写的操作系统 ios android  | 否 |
+| oslo | Offer 大写的操作系统 IOS ANDROID | 否 |
+| cc2lo | 2位小写countrycode | 否 |
+| cc3lo | 3位小写countrycoded | 否 |
+| cc2up | 3位小写countrycode  | 否 |
+| cc2up | 3位小写countrycode  | 否 |
+
 
 
 **示例：**
