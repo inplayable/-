@@ -4,9 +4,9 @@
 
 ## 2. 对接下游
 
-运营需要配置两项内容，分别为 click_pattern 和 postback_url 。
+运营需要配置两项内容，分别为 click_url 和 postback_url 。
 
-### 2.1 配置 click_pattern
+### 2.1 配置 click_url
 
 该配置的 click_pattern 为下游在从 Iplayable 平台拉取 offer 单子时获取到的点击链接，详情可见 Downstream_Doc.md 文档。填写的数据库位置为 downstream 表的 click_pattern 字段，每个下游都需单独配置。
 
@@ -56,6 +56,8 @@ http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&gaid=4716d154-
 这里配置的 postback_url 为 Iplayable 平台需要回传给下游的信息，填写位置为 downstream 表的 postback_url 字段和 event_postback_url 字段。其中 postback_url 字段为安装事件回传链接，event_postback_url 为后链路事件回传链接。每个下游但要单独配置并填写这两个字段，若暂时无后链路事件，event_postback_url可暂时为空。
 
 Iplayable 网盟平台支持的回调链接宏参：
+
+所支持的宏参可分为以下几类：
 
 **a.** 点击跟踪链接信息回传宏参
 
@@ -171,8 +173,6 @@ Iplayable 的运营人员配置好 downstream 表的 click_pattern 和 postback_
 
 支持的宏参：
 
-
-
 | Placeholder | Description | 是否必须 |
 | --- | ------- | ------- |
 | affname | 账户名 | 是 |
@@ -188,28 +188,46 @@ Iplayable 的运营人员配置好 downstream 表的 click_pattern 和 postback_
 
 **示例：**
 
-假设，上游的域名和路由为some.upstream.domain.com、getoffer；上游接收账户名的参数名为aff_id；上游接收密码的参数名为aff_token；上游接收操作系统平台的参数名为platform，并且接收的参数值是小写的操作系统；上游接收国家的参数名为countries，并且接收的参数值是2位大写格式，运营需要进行如下配置：
+假设，上游的域名和路由为 some.upstream.domain.com、getoffer；上游接收账户名的参数名为 aff_id；上游接收密码的参数名为 aff_token；上游接收操作系统平台的参数名为platform，并且接收的参数值是小写的操作系统；上游接收国家的参数名为 countries，并且接收的参数值是2位大写格式，运营需要进行如下配置：
 
 http://some.upstream.domain.com/getoffer?aff_id={affname}&aff_token={afftoken}&platform={oslo}&countries={cc2up}
 
-其中{oslo}、{cc2up}实际中需要使用的 placeholder 请与上游沟通后并参考上述表格。
+其中 {oslo}、{cc2up} 实际中需要使用的 placeholder 请与上游沟通后并参考上述表格。
 
 ### 3.2 对接三方
 
-现有三方平台主要有appsflyer和adjust，因此我们将其分为两个小节介绍。需要配置的位置为pg数据库的upstream表的postback_pattern和postback_event_pattern，分别对应安装信息回调和后链路事件信息回调，下面将详细说明。
+现有三方平台主要有 appsflyer 和 adjust，因此我们将其分为两个小节介绍。需要配置的位置为pg数据库的 upstream 表的 postback_pattern 和 postback_event_pattern ，分别对应安装信息回调和后链路事件信息回调，下面将详细说明。
 
 #### 3.2.1 对接appsflyer
 
 #### 3.2.1.1 配置安装回调pattern
 
+该项配置的是 upstream 表的 postback_pattern 字段，配置示例：
+
+http://callback.flatmobi.com/install/appsflyer?click_id={clickid}&blocked_reason={breason}&blocked_reason_value={bvalue}&blocked_sub_reason={bsub}&install_unix_ts={insts}
+
+**注：**该
 
 
 #### 3.2.1.2 配置后链路事件回调pattern
 
+该项配置的是 upstream 表的 postback_event_pattern 字段，配置示例：
+
+http://callback.flatmobi.com/install/appsflyer?click_id={clickid}&event_name={ename}&event_value={evalue}
 
 #### 3.2.2 对接adjust
 
+#### 3.2.2.1 配置安装回调pattern
 
+该项配置的是 upstream 表的 postback_pattern 字段，配置示例：
+
+http://callback.flatmobi.com/install/adjust?click_id={clickid}&installed_at={insts}&rejection_reason={breason}
+
+#### 3.2.2.2 配置后链路事件回调pattern
+
+该项配置的是 upstream 表的 postback_event_pattern 字段，配置示例：
+
+http://callback.flatmobi.com/install/adjust?click_id={clickid}&event_name={ename}&event_value={evalue}
 
 <!-- ## 附录1：
 
