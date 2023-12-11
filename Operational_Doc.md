@@ -178,6 +178,11 @@ Iplayable 的运营人员配置好 downstream 表的 click_pattern 和 postback_
 | cc2up       | 2位大写countrycode   | 否 |
 | cc3up       | 3位大写countrycode   | 否 |
 
+| Placeholder | Description | 是否必须 |
+| --- | ------- | ------- |
+| {payout} | Offer 收益，货币为美金 | 否 |
+
+
 **示例：**
 
 假设，上游的域名和路由为some.upstream.domain.com、getoffer；上游接收账户名的参数名为aff_id；上游接收密码的参数名为aff_token；上游接收操作系统平台的参数名为platform，并且接收的参数值是小写的操作系统；上游接收国家的参数名为countries，并且接收的参数值是2位大写格式，运营需要进行如下配置：
