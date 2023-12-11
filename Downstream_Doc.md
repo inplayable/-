@@ -105,7 +105,7 @@ http://callback.flatmobi.com/api/v1/click
 | gaid | {gaid} | 谷歌广告 ID | android系统必传 |
 | idfa | {idfa} | IOS idfa | ios系统必传 |
 
-**注：** 点击跟踪链接中的查询参数的名称和宏参必须对应，并且不支持更改。
+**注：** 点击跟踪链接中的查询参数的名称和宏参必须对应（如上），并且不支持更改。
 
 **示例：**
 
