@@ -98,20 +98,24 @@ Iplayable 网盟平台支持的回调链接宏参：
 
 #### 2.2.1 配置 postback_url 字段
 
+当回传事件为安装行为时，系统会使用该字段配置的url，对于安装行为，Iplayable 系统支持a、b、d三部分宏参，不支持配置和回传c部分宏参。
+
 **配置示例：**
 
 http://your.domain.com/your/route?your_aff_para={app_id}&your_camp_para={campaign_id}&your_gaid_para={gaid}&your_blockreason_para={breason}&your_payout_para={payout}&other_fix=fixvalue
 
-**注：** 配置时请将 your.domain.com、your/route 替换为下游的真实回调域名和路径；your_aff_para、your_camp_para、your_gaid_para、your_blockreason_para、your_payout_para 请替换为下游的查询参数名称；other_fix为可配置的固定回传参数，配置时请替换为下游要求的固定查询参数名称，并配置固定查询参数值。
+**注：** 配置时请将 your.domain.com、your/route 替换为下游的真实回调域名和路径；your_aff_para、your_camp_para、your_gaid_para、your_blockreason_para、your_payout_para 请替换为下游的查询参数名称；other_fix为可配置的固定回传参数，配置时请替换为下游要求的固定查询参数名称，并配置固定查询参数值。同时需要在upstream表中的postback_pattern字段配置对应内容，将在3.2.x.1中详细说明。
 
 
 #### 2.2.2 配置 event_postback_url 字段
+
+当回传事件为后链路行为时，系统会使用该字段配置的url，对于后链路行为，Iplayable 系统支持a、c、d三部分宏参，不支持配置和回传b部分宏参。
 
 **配置示例：**
 
 http://your.domain.com/your/route?your_aff_para={app_id}&your_camp_para={campaign_id}&your_gaid_para={gaid}&your_eventname_para={ename}&your_payout_para={payout}&other_fix=fixvalue
 
-**注：** 配置时替换逻辑同安装回调链接示例。
+**注：** 配置时替换逻辑同安装回调链接示例。同时需要在upstream表中的postback_event_pattern字段配置对应内容，将在3.2.x.2中详细说明。
 
 
 
@@ -167,16 +171,7 @@ Iplayable 的运营人员配置好 downstream 表的 click_pattern 和 postback_
 
 支持的宏参：
 
-| Placeholder | Description | 是否必须 |
-| ----------- | ---------- | --------｜
-| affname     | 账户名               | 是 |
-| afftoken    | 密码                 | 是 |
-| osup        | 大写的操作系统 IOS ANDROID | 否 |
-| oslo        | 小写的操作系统 ios android | 否 |
-| cc2lo       | 2位小写countrycode   | 否 |
-| cc3lo       | 3位小写countrycode   | 否 |
-| cc2up       | 2位大写countrycode   | 否 |
-| cc3up       | 3位大写countrycode   | 否 |
+
 
 | Placeholder | Description | 是否必须 |
 | --- | ------- | ------- |
@@ -201,9 +196,22 @@ http://some.upstream.domain.com/getoffer?aff_id={affname}&aff_token={afftoken}&p
 
 ### 3.2 对接三方
 
+现有三方平台主要有appsflyer和adjust，因此我们将其分为两个小节介绍。需要配置的位置为pg数据库的upstream表的postback_pattern和postback_event_pattern，分别对应安装信息回调和后链路事件信息回调，下面将详细说明。
+
+#### 3.2.1 对接appsflyer
+
+#### 3.2.1.1 配置安装回调pattern
 
 
-## 附录1：
+
+#### 3.2.1.2 配置后链路事件回调pattern
+
+
+#### 3.2.2 对接adjust
+
+
+
+<!-- ## 附录1：
 
 在与下游正式交互时， Iplayable 平台会根据下游发送的点击以及上游或三方传来的回调数据提取宏参，然后 IPlayable 平台会使用提取的填充 postback url 并使用填充后的 postback url 对下游进行get请求，**示例如下：**
 
@@ -239,4 +247,4 @@ http://callback.flatmobi.com/our_rout?our_click_param=123&istall_time=2023-11-11
 
 ### c. Iplayable 平台系统使用步骤 b 提取到的宏参填充步骤a中配置的 postback url ，并使用填充后的 url 进行 get 请求，填充结果示例如下：
 
-http://your.domain.com/your/route?your_click_para=abc&your_aff_para=1000&your_camp_para=22&your_blockreason_para=test1&your_payout_para=1.5&&other_fix=fixvalue&other_fix2=fixvalue2&your_name=somevalue1
+http://your.domain.com/your/route?your_click_para=abc&your_aff_para=1000&your_camp_para=22&your_blockreason_para=test1&your_payout_para=1.5&&other_fix=fixvalue&other_fix2=fixvalue2&your_name=somevalue1 -->
