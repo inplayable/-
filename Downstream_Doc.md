@@ -96,7 +96,7 @@ http://callback.flatmobi.com/api/v1/getoffer?app_id=1000&app_key=098f6bcd4621d37
 http://callback.flatmobi.com/api/v1/click
 ```
 
-点击链接查询参数支持：
+点击跟踪链接查询参数支持：
 
 | 参数名称 | 宏参 | 参数说明 | 是否必须 |
 | -------- | ------ | -------- | ------ |
@@ -105,7 +105,7 @@ http://callback.flatmobi.com/api/v1/click
 | gaid | {gaid} | 谷歌广告 ID | android系统必传 |
 | idfa | {idfa} | IOS idfa | ios系统必传 |
 
-**注：** 点击链接中的查询参数的名称和宏参必须对应，并且不支持更改。
+**注：** 点击跟踪链接中的查询参数的名称和宏参必须对应，并且不支持更改。
 
 **示例：**
 
@@ -113,7 +113,7 @@ http://callback.flatmobi.com/api/v1/click
 
 http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&&gaid={gaid}&idfa={idfa}
 
-其中app_id 和 offer_id 查询参数的值为 Iplayable 网盟平台进行填写，填写后在下游查询offer时返回，请看第3节；clickid、gaid、idfa 查询参数的值为下游进行填写替换，替换为对应值后发送给 Iplayable 网盟平台，例如下游填写后发送给 Iplayable 网盟平台的内容应为以下**示例** ：
+其中app_id 和 offer_id 查询参数的值为 Iplayable 网盟平台进行填写，填写后在下游查询offer时返回，请看第3节；gaid、idfa 查询参数的值为下游进行填写替换，替换为对应值后发送给 Iplayable 网盟平台，例如下游填写替换点击跟踪链接后发送给 Iplayable 网盟平台的内容应为以下格式**示例** ：
 
 http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&gaid=4716d154-7232-11ee-800e-e9037848532a&idfa={idfa}
 
@@ -126,7 +126,7 @@ http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&gaid=4716d154-
 
 Iplayable 网盟平台支持的回调链接宏参：
 
-**a.** 点击链接参数回传
+**a.** 点击跟踪链接信息回传宏参
 
 | 宏参 | 参数说明 | 是否必须 |
 | --- | ------- | ------- |
@@ -135,9 +135,9 @@ Iplayable 网盟平台支持的回调链接宏参：
 | {gaid} | 谷歌广告 ID | 否 |
 | {idfa} | IOS idfa | 否 |
 
-**注：** Iplayable 网盟平台支持将点击请求的的信息回传给下游。宏参{aff_id}、{campaign_id}、{gaid}、{idfa} 对应的值来源于下游发送的 click_url ，见第4节，分别对应第 4 节中的宏参 {app_id} 、 {offer_id}、{gaid}、{idfa}。
+**注：** Iplayable 网盟平台支持将点击跟踪链接请求的的信息回传给下游。宏参{aff_id}、{campaign_id}、{gaid}、{idfa} 对应的值来源于下游发送的 click_url ，见第4节，分别对应第 4 节中的宏参 {app_id} 、 {offer_id}、{gaid}、{idfa}。
 
-**b.** 安装信息回传
+**b.** 上游/三方安装信息回传宏参
 
 | 宏参 | 参数说明 | 是否必须 |
 | --- | ------- | ------- |
@@ -148,7 +148,7 @@ Iplayable 网盟平台支持的回调链接宏参：
 
 **注：** 该部分宏参对应的值来自于上游/三方的安装回调，因此仅支持安装事件的回传。
 
-**c.** 后链路事件信息回传
+**c.** 上游/三方后链路事件信息回传宏参
 
 | 宏参 | 参数说明 | 是否必须 |
 | --- | ------- | ------- |
