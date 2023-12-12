@@ -55,7 +55,7 @@ http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&gaid=4716d154-
 
 这里配置的 postback_url 为 Iplayable 平台需要回传给下游的信息，填写位置为 downstream 表的 postback_url 字段和 event_postback_url 字段。其中 postback_url 字段为安装事件回传链接，event_postback_url 为后链路事件回传链接。每个下游但要单独配置并填写这两个字段，若暂时无后链路事件，event_postback_url可暂时为空。
 
-Iplayable 网盟平台支持的回调链接宏参：
+**Iplayable 网盟平台支持的回调链接宏参：**
 
 所支持的宏参可分为以下几类：
 
@@ -202,11 +202,20 @@ http://some.upstream.domain.com/getoffer?aff_id={affname}&aff_token={afftoken}&p
 
 #### 3.2.1.1 配置安装回调pattern
 
-该项配置的是 upstream 表的 postback_pattern 字段，配置示例：
+该项配置的是 upstream 表的 postback_pattern 字段，配置**示例：**
 
 http://callback.flatmobi.com/install/appsflyer?click_id={clickid}&blocked_reason={breason}&blocked_reason_value={bvalue}&blocked_sub_reason={bsub}&install_unix_ts={insts}
 
-**注：**该
+**注：** 配置该部分需要与 2.2.1 节配置的 postback_url 对齐。例如，postback_url 的查询参数需要回传{breason}宏参，这里配置时就必须回调{breason}。
+
+支持的宏参：
+
+| 宏参 | 参数说明 | 是否必须 |
+| --- | ------- | ------- |
+| {insts} | 安装时间戳，仅支持安装事件回传 | 否 |
+| {breason} | Block reason，仅支持安装事件回传 | 否 |
+| {bsub} | Block sub reason，仅支持安装事件回传 | 否 |
+| {bvalue} | Block value，仅支持安装事件回传 | 否 |
 
 
 #### 3.2.1.2 配置后链路事件回调pattern
