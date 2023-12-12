@@ -33,7 +33,7 @@ b.  参数部分的参数值（宏）需要替换为下游渠道的宏，例如�
 
 **Iplayable 平台支持的点击请求的参数：**
 
-| 字段名称 | 对应宏参 | 参数说明 | 是否必须 |
+| 参数名称 | 对应宏参 | 参数说明 | 是否必须 |
 | -------- | ------ | -------- | ------ |
 | app_id | {app_id} | 渠道 id | 是 |
 | offer_id | {offer_id} | offerid | 是 |
@@ -206,23 +206,36 @@ http://some.upstream.domain.com/getoffer?aff_id={affname}&aff_token={afftoken}&p
 
 http://callback.flatmobi.com/install/appsflyer?click_id={clickid}&blocked_reason={breason}&blocked_reason_value={bvalue}&blocked_sub_reason={bsub}&install_unix_ts={insts}
 
-**注：** 配置该部分需要与 2.2.1 节配置的 postback_url 对齐。例如，postback_url 的查询参数需要回传{breason}宏参，这里配置时就必须回调{breason}。
+**注：** 配置该部分需要与 2.2.1 节配置的 postback_url 对齐。例如，postback_url 的查询参数需要回传{breason}宏参，这里配置时就必须回调{breason}，其他。
+
+支持的宏参：
+
+参数名称 | 宏参 | 参数说明 | 是否必须 |
+| ----- | --- | ------- | ------- |
+| click_id | {clickid} | Iplayable 平台生成的click id | 是 |
+| install_unix_ts | {insts} | 安装时间戳，仅支持安装事件回传 | 否 |
+| blocked_reason | {breason} | Block reason，仅支持安装事件回传 | 否 |
+| blocked_sub_reason | {bsub} | Block sub reason，仅支持安装事件回传 | 否 |
+| blocked_reason_value | {bvalue} | Block value，仅支持安装事件回传 | 否 |
+
+
+#### 3.2.1.2 配置后链路事件回调pattern
+
+该项配置的是 upstream 表的 postback_event_pattern 字段，配置**示例：**
+
+http://callback.flatmobi.com/install/appsflyer?click_id={clickid}&event_name={ename}&event_value={evalue}
+
+**注：** 配置该部分需要与 2.2.2 节配置的 event_postback_url 对齐。例如，event_postback_url 的查询参数需要回传{ename}宏参，这里配置时就必须回调{ename}。
 
 支持的宏参：
 
 | 宏参 | 参数说明 | 是否必须 |
 | --- | ------- | ------- |
-| {insts} | 安装时间戳，仅支持安装事件回传 | 否 |
-| {breason} | Block reason，仅支持安装事件回传 | 否 |
-| {bsub} | Block sub reason，仅支持安装事件回传 | 否 |
-| {bvalue} | Block value，仅支持安装事件回传 | 否 |
-
-
-#### 3.2.1.2 配置后链路事件回调pattern
-
-该项配置的是 upstream 表的 postback_event_pattern 字段，配置示例：
-
-http://callback.flatmobi.com/install/appsflyer?click_id={clickid}&event_name={ename}&event_value={evalue}
+| {clickid} | Iplayable 平台生成的click id | 是 |
+| {ename} | 后链路事件，注册或者付费等，仅支持后链路事件回传 | 否 |
+| {erev} | 后链路事件收益，仅支持后链路事件回传 | 否 |
+| {etime} | 后链路事件时间戳，仅支持后链路事件回传 | 否 |
+| {evalue} | 后链路事件value，仅支持后链路事件回传 | 否 |
 
 #### 3.2.2 对接adjust
 
@@ -232,11 +245,33 @@ http://callback.flatmobi.com/install/appsflyer?click_id={clickid}&event_name={en
 
 http://callback.flatmobi.com/install/adjust?click_id={clickid}&installed_at={insts}&rejection_reason={breason}
 
+**注：** 配置该部分需要与 2.2.1 节配置的 postback_url 对齐。例如，postback_url 的查询参数需要回传{breason}宏参，这里配置时就必须回调{breason}，其他。
+
+支持的宏参：
+
+| 宏参 | 参数说明 | 是否必须 |
+| --- | ------- | ------- |
+| {clickid} | Iplayable 平台生成的click id | 是 |
+| {insts} | 安装时间戳，仅支持安装事件回传 | 否 |
+| {breason} | reject reason，仅支持安装事件回传 | 否 |
+
 #### 3.2.2.2 配置后链路事件回调pattern
 
 该项配置的是 upstream 表的 postback_event_pattern 字段，配置示例：
 
 http://callback.flatmobi.com/install/adjust?click_id={clickid}&event_name={ename}&event_value={evalue}
+
+**注：** 配置该部分需要与 2.2.2 节配置的 event_postback_url 对齐。例如，event_postback_url 的查询参数需要回传{ename}宏参，这里配置时就必须回调{ename}。
+
+支持的宏参：
+
+| 宏参 | 参数说明 | 是否必须 |
+| --- | ------- | ------- |
+| {clickid} | Iplayable 平台生成的click id | 是 |
+| {ename} | 后链路事件，注册或者付费等，仅支持后链路事件回传 | 否 |
+| {erev} | 后链路事件收益，仅支持后链路事件回传 | 否 |
+| {etime} | 后链路事件时间戳，仅支持后链路事件回传 | 否 |
+| {evalue} | 后链路事件value，仅支持后链路事件回传 | 否 |
 
 <!-- ## 附录1：
 
