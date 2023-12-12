@@ -74,7 +74,7 @@ http://callback.flatmobi.com/api/v1/getoffer?app_id=1000&app_key=098f6bcd4621d37
 响应内容为 json 字符串，"status": "success" 表示请求成功，"status": "fail" 表示请求失败。datas 为 offer 列表，offer 列表字段说明如下：
 
 | 字段名称 | 字段类型 | 参数说明 |
-| -------- | ------ | -------- |
+| ------- | ------ | ------- |
 | app_name | string |  app 名称 |
 | app_pkg | string | app 包名 |
 | click_url | string | Offer 跳转链接 |
@@ -89,7 +89,7 @@ http://callback.flatmobi.com/api/v1/getoffer?app_id=1000&app_key=098f6bcd4621d37
 | price | float32 | Offer 单价 |
 | pricing_models | string | 计费事件 CPI 等 |
 
-## 4. Click_url 配置说明
+## 4. 点击跟踪链接参数说明
 
 发送get请求，请求地址：
 ```bash
@@ -109,11 +109,13 @@ http://callback.flatmobi.com/api/v1/click
 
 **示例：**
 
-点击跟踪链接示例 ：
+下游调用查询 offer API 得到的 click_url ：
 
 http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&&gaid={gaid}&idfa={idfa}
 
-其中app_id 和 offer_id 查询参数的值为 Iplayable 网盟平台进行填写，填写后在下游查询offer时返回，请看第3节；gaid、idfa 查询参数的值为下游进行填写替换，替换为对应值后发送给 Iplayable 网盟平台，例如下游填写替换点击跟踪链接后发送给 Iplayable 网盟平台的内容应为以下格式**示例** ：
+其中app_id 和 offer_id 查询参数的值为 Iplayable 网盟平台进行填写，填写后在下游查询offer时返回，请看第3节；gaid、idfa 查询参数的值为下游进行填写替换，替换为对应值后发送给 Iplayable 网盟平台，例如下游填写替换点击跟踪链接后发送给 Iplayable 网盟平台的内容应为以下格式。
+
+**下游发送给 Iplayable 平台的点击跟踪链接示例：**
 
 http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&gaid=4716d154-7232-11ee-800e-e9037848532a&idfa={idfa}
 

@@ -6,7 +6,7 @@
 
 运营需要配置两项内容，分别为 click_url 和 postback_url 。
 
-### 2.1 配置 click_url
+### 2.1 配置 click_url 点击跟踪链接
 
 该配置的 click_pattern 为下游在从 Iplayable 平台拉取 offer 单子时获取到的点击链接，详情可见 Downstream_Doc.md 文档。填写的数据库位置为 downstream 表的 click_pattern 字段，每个下游都需单独配置。
 
@@ -53,7 +53,7 @@ http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&gaid=4716d154-
 
 ### 2.2 配置 postback_url
 
-这里配置的 postback_url 为 Iplayable 平台需要回传给下游的信息，填写位置为 downstream 表的 postback_url 字段和 event_postback_url 字段。其中 postback_url 字段为安装事件回传链接，event_postback_url 为后链路事件回传链接。每个下游但要单独配置并填写这两个字段，若暂时无后链路事件，event_postback_url可暂时为空。
+这里配置的 postback_url 为 Iplayable 平台需要回传给下游的信息，填写位置为 downstream 表的 postback_url 字段和 event_postback_url 字段。其中 postback_url 字段为安装事件回传链接，event_postback_url 为后链路事件回传链接。每个下游要单独配置并填写这两个字段，若暂时无后链路事件，event_postback_url可暂时为空。
 
 **Iplayable 网盟平台支持的回调链接宏参：**
 
@@ -106,7 +106,11 @@ http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&gaid=4716d154-
 
 http://your.domain.com/your/route?your_aff_para={app_id}&your_camp_para={campaign_id}&your_gaid_para={gaid}&your_blockreason_para={breason}&your_payout_para={payout}&other_fix=fixvalue
 
-**注：** 配置时请将 your.domain.com、your/route 替换为下游的真实回调域名和路径；your_aff_para、your_camp_para、your_gaid_para、your_blockreason_para、your_payout_para 请替换为下游的查询参数名称；other_fix为可配置的固定回传参数，配置时请替换为下游要求的固定查询参数名称，并配置固定查询参数值。同时需要在upstream表中的postback_pattern字段配置对应内容，将在3.2.x.1中详细说明。
+**注：**
+
+*配置时请将 your.domain.com、your/route 替换为下游的真实回调域名和路径；your_aff_para、your_camp_para、your_gaid_para、your_blockreason_para、your_payout_para 请替换为下游的查询参数名称；other_fix为可配置的固定回传参数，配置时请替换为下游要求的固定查询参数名称，并配置固定查询参数值。
+
+*同时需要在 upstream 表中的 postback_pattern 字段配置对应内容，若下游将在 3.2.x.1 中详细说明。
 
 
 #### 2.2.2 配置 event_postback_url 字段
@@ -206,7 +210,7 @@ http://some.upstream.domain.com/getoffer?aff_id={affname}&aff_token={afftoken}&p
 
 http://callback.flatmobi.com/install/appsflyer?click_id={clickid}&blocked_reason={breason}&blocked_reason_value={bvalue}&blocked_sub_reason={bsub}&install_unix_ts={insts}
 
-**注：** 配置该部分需要与 2.2.1 节配置的 postback_url 对齐。例如，postback_url 的查询参数需要回传{breason}宏参，这里配置时就必须回调{breason}，其他。
+**注：** 配置该部分需要与 2.2.1 节配置的 postback_url 对齐。例如，postback_url 的查询参数需要回传{breason}宏参，这里配置时就必须回调{breason}。
 
 支持的宏参：
 
@@ -237,6 +241,25 @@ http://callback.flatmobi.com/install/appsflyer?click_id={clickid}&event_name={en
 | {etime} | 后链路事件时间戳，仅支持后链路事件回传 | 否 |
 | {evalue} | 后链路事件value，仅支持后链路事件回传 | 否 |
 
+#### 3.2.1.3 配置 callback
+
+配置位置为 appsflyer 三方平台的页面
+
+安装 callback 示例：
+
+http://callback.flatmobi.com/api/v1/install/appsflyer?site_id={Site ID}&app_id={App ID}&blocked_reason={Blocked reason}&blocked_reason_value={Blocked reason value}&blocked_sub_reason={Blocked sub reason}&bundle_id={Bundle ID}&campaign_id={Campaign ID}&install_unix_ts={Install time}&click_id={Click ID}
+
+event callback 示例：
+
+http://callback.flatmobi.com/api/v1/install/appsflyer?site_id={Site ID}&app_id={App ID}&click_id={Click ID}
+
+#### 3.2.1.3 配置 click_track_url
+
+示例：
+
+
+
+
 #### 3.2.2 对接adjust
 
 #### 3.2.2.1 配置安装回调pattern
@@ -249,11 +272,11 @@ http://callback.flatmobi.com/install/adjust?click_id={clickid}&installed_at={ins
 
 支持的宏参：
 
-| 宏参 | 参数说明 | 是否必须 |
-| --- | ------- | ------- |
-| {clickid} | Iplayable 平台生成的click id | 是 |
-| {insts} | 安装时间戳，仅支持安装事件回传 | 否 |
-| {breason} | reject reason，仅支持安装事件回传 | 否 |
+| 参数名称 | 宏参 | 参数说明 | 是否必须 |
+| ------- | --- | ------- | ------- |
+| click_id | {clickid} | Iplayable 平台生成的click id | 是 |
+| installeed_at | {insts} | 安装时间戳，仅支持安装事件回传 | 否 |
+| rejection_reason | {breason} | reject reason，仅支持安装事件回传 | 否 |
 
 #### 3.2.2.2 配置后链路事件回调pattern
 
