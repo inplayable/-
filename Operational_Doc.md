@@ -108,9 +108,9 @@ http://your.domain.com/your/route?your_aff_para={app_id}&your_camp_para={campaig
 
 **注：**
 
-*配置时请将 your.domain.com、your/route 替换为下游的真实回调域名和路径；your_aff_para、your_camp_para、your_gaid_para、your_blockreason_para、your_payout_para 请替换为下游的查询参数名称；other_fix为可配置的固定回传参数，配置时请替换为下游要求的固定查询参数名称，并配置固定查询参数值。
+* 配置时请将 your.domain.com、your/route 替换为下游的真实回调域名和路径；your_aff_para、your_camp_para、your_gaid_para、your_blockreason_para、your_payout_para 请替换为下游的查询参数名称；other_fix为可配置的固定回传参数，配置时请替换为下游要求的固定查询参数名称，并配置固定查询参数值。
 
-*同时需要在 upstream 表中的 postback_pattern 字段配置对应内容，若下游将在 3.2.x.1 中详细说明。
+* 需要在 upstream 表中的 postback_pattern 字段配置对应内容，若下游将在 3.2.x.1 中详细说明。
 
 
 #### 2.2.2 配置 event_postback_url 字段
