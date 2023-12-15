@@ -51,17 +51,16 @@ http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&gaid=4716d154-
 
 * 没有使用宏替换的查询参数表示下游在该次点击请求中不提供该参数，例如 idfa={idfa}。
 
-* 若下游需要添加其他额外参数，与下游沟通后请在 click_pattern 字段配置时添加，并在 postback_url 中添加。例如，下游想在点击跟踪链接中添加 clickid 参数，需要修改以下两处：
+* 若下游需要添加其他额外参数，与下游沟通后请在 click_pattern 字段配置时添加，并在 postback url 中添加。例如，下游想在点击跟踪链接中添加 clickid 参数，需要修改以下两处：
 
-* 1）配置 downstream 表的 click_pattern 字段，添加 clickid={click_id} ，其中 参数名和宏参，修改示例：
+* 1）配置 downstream 表的 click_pattern 字段，添加 clickid={click_id} ，其中参数名 clickid 可以任意内容，宏参 {click_id} 也可为任意，但需要与 postback url 中对应，修改示例：
 
 http://callback.flatmobi.com/api/v1/click?app_id={app_id}&offer_id={offer_id}&gaid={gaid}&idfa={idfa}&clickid={click_id}
 
-* 2）配置 postback_url ，具体细节会在 2.2.x 节中说明。
+* 2）配置 postback url ，具体细节会在 2.2.x 节中说明。
 
-下游同样需要替换
 
-### 2.2 配置 postback_url 回传url
+### 2.2 配置 postback url 回传url
 
 这里配置的 postback_url 为 Iplayable 平台需要回传给下游的信息，填写位置为 downstream 表的 postback_url 字段和 event_postback_url 字段。其中 postback_url 字段为安装事件回传链接，event_postback_url 为后链路事件回传链接。每个下游要单独配置并填写这两个字段，若暂时无后链路事件，event_postback_url可暂时为空。
 
@@ -118,7 +117,7 @@ http://your.domain.com/your/route?your_aff_para={app_id}&your_camp_para={campaig
 
 * 配置时请将 your.domain.com、your/route 替换为下游的真实回调域名和路径；your_aff_para、your_camp_para、your_gaid_para、your_blockreason_para、your_payout_para 请替换为下游的查询参数名称；other_fix为可配置的固定回传参数，配置时请替换为下游要求的固定查询参数名称，并配置固定查询参数值。
 
-* 若下有想要回传其他不包含在 a 中的参数信息，例如，下游想要回传 clickid 参数，该参数的宏参需要与 2.1 节中对应，例如 2.1 节 click_pattern 使用的是 {click_id} 宏参，这里也必须配置使用该宏参，如 your_click_para={click_id}，your_click_para 请替换为下游的参数名称。
+* 若下有想要回传其他不包含在 a 中的参数信息，例如，下游想要回传 clickid 参数，该参数的宏参需要与 2.1 节中对应，例如 2.1 节 click_pattern 使用的是 {click_id} 宏参，这里也必须配置使用该宏参，在 postback_url 中添加 your_click_para={click_id}，your_click_para 请替换为下游的参数名称。
 
 * 要配置 b 中的相关参数需要在 upstream 表中的 postback_pattern 字段配置对应内容；示例链接配置的是 {breason} 参数，若下游想要回传其他从上游/三方得到的安装信息，也可以在 upstream 表中的 postback_pattern 字段配置，前提是上游/三方支持回传该参数信息。详细配置规则将在 3.2.x.1 中说明。
 
@@ -135,7 +134,9 @@ http://your.domain.com/your/route?your_aff_para={app_id}&your_camp_para={campaig
 
 * 配置时请将 your.domain.com、your/route 替换为下游的真实回调域名和路径；your_aff_para、your_camp_para、your_gaid_para、your_eventname_para、your_payout_para 请替换为下游的查询参数名称；other_fix为可配置的固定回传参数，配置时请替换为下游要求的固定查询参数名称，并配置固定查询参数值。
 
-* 若要配置 c 中的相关参数需要在 upstream 表中的 postback_event_pattern 字段配置对应内容；若下游想要回传其他从上游/三方得到的安装信息，也可以在 upstream 表中的 postback_event_pattern 字段配置，前提是上游/三方支持回传该参数信息。详细配置规则将在 3.2.x.2 中说明。
+* 若下有想要回传其他不包含在 a 中的参数信息，例如，下游想要回传 clickid 参数，该参数的宏参需要与 2.1 节中对应，例如 2.1 节 click_pattern 使用的是 {click_id} 宏参，这里也必须配置使用该宏参，在 event_postback_url 中添加 your_click_para={click_id}，your_click_para 请替换为下游的参数名称。
+
+* 要配置 c 中的相关参数需要在 upstream 表中的 postback_event_pattern 字段配置对应内容；示例链接配置的是 {ename} 参数，若下游想要回传其他从上游/三方得到的后链路信息，也可以在 upstream 表中的 postback_event_pattern 字段配置，前提是上游/三方支持回传该参数信息。详细配置规则将在 3.2.x.2 中说明。
 
 
 
