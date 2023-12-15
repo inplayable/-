@@ -53,7 +53,7 @@ http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&gaid=4716d154-
 
 * 若下游需要添加其他额外参数，与下游沟通后请在 click_pattern 字段配置时添加，并在 postback url 中添加。例如，下游想在点击跟踪链接中添加 clickid 参数，需要修改以下两处：
 
-* 1）配置 downstream 表的 click_pattern 字段，添加 clickid={click_id} ，其中参数名 clickid 可以任意内容，宏参 {click_id} 也可为任意，但需要与 postback url 中对应，修改示例：
+* 1）配置 downstream 表的 click_pattern 字段，添加 clickid={click_id} ，其中参数名 clickid 可以任意内容，宏参 {click_id} 也可为任意，但宏参需要与 postback url 中对应，修改示例：
 
 http://callback.flatmobi.com/api/v1/click?app_id={app_id}&offer_id={offer_id}&gaid={gaid}&idfa={idfa}&clickid={click_id}
 
@@ -77,7 +77,7 @@ http://callback.flatmobi.com/api/v1/click?app_id={app_id}&offer_id={offer_id}&ga
 | {gaid} | 谷歌广告 ID | 否 |
 | {idfa} | IOS idfa | 否 |
 
-**注：** Iplayable 网盟平台支持将点击跟踪链接请求的的信息回传给下游。宏参{app_id}、{offer_id}、{gaid}、{idfa} 对应的值来源于下游发送的 click_url ，见第4节，分别对应第 4 节中的宏参 {app_id}、{offer_id}、{gaid}、{idfa}。
+* Iplayable 网盟平台支持将点击跟踪链接请求的的信息回传给下游。宏参{app_id}、{offer_id}、{gaid}、{idfa} 对应的值来源于下游发送的 click_url ，见第4节，分别对应第 4 节中的宏参 {app_id}、{offer_id}、{gaid}、{idfa}。
 
 **b.** 上游/三方安装信息回传宏参
 
@@ -88,7 +88,7 @@ http://callback.flatmobi.com/api/v1/click?app_id={app_id}&offer_id={offer_id}&ga
 | {bsub} | Block sub reason，仅支持安装事件回传 | 否 |
 | {bvalue} | Block value，仅支持安装事件回传 | 否 |
 
-**注：** 该部分宏参对应的值来自于上游/三方的安装回调，因此仅支持安装事件信息的回传。
+* 该部分宏参对应的值来自于上游/三方的安装回调，因此仅支持安装事件信息的回传。
 
 **c.** 上游/三方后链路事件信息回传宏参
 
@@ -218,15 +218,15 @@ http://some.upstream.domain.com/getoffer?aff_id={affname}&aff_token={afftoken}&p
 
 现有三方平台主要有 appsflyer 和 adjust，因此我们将其分为两个小节介绍。需要配置的位置为pg数据库的 upstream 表的 postback_pattern 和 postback_event_pattern ，分别对应安装信息回调和后链路事件信息回调，下面将详细说明。
 
-#### 3.2.1 对接appsflyer
+#### 3.2.1 对接 appsflyer
 
-#### 3.2.1.1 配置安装回调pattern
+#### 3.2.1.1 配置安装回调 pattern
 
 该项配置的是 upstream 表的 postback_pattern 字段，配置**示例：**
 
 http://callback.flatmobi.com/install/appsflyer?click_id={clickid}&blocked_reason={breason}&blocked_reason_value={bvalue}&blocked_sub_reason={bsub}&install_unix_ts={insts}
 
-* 配置该部分需要与 2.2.1 节配置的 postback_url 对齐。例如，postback_url 的查询参数需要回传 {breason} 宏参，这里配置时就必须配置 {breason}。
+* 配置该部分需要与 2.2.1 节配置的 postback_url 对齐，使用相同宏参。例如，postback_url 的查询参数需要回传 {breason} 宏参，这里配置时就必须配置 {breason}。
 
 支持的宏参：
 
@@ -238,10 +238,10 @@ http://callback.flatmobi.com/install/appsflyer?click_id={clickid}&blocked_reason
 | blocked_sub_reason | {bsub} | Block sub reason，仅支持安装事件回传 | 否 |
 | blocked_reason_value | {bvalue} | Block value，仅支持安装事件回传 | 否 |
 
-* 若下游或者 Iplayable 平台需要回传其他不包含在以上参数中的信息，需要 appsflyer 三方平台支持该参数，并且在 postback_pattern 字段的 url 中添加配置该参数。若是下游需要该额外参数则只需与 2.2.1 节配置的 postback_url 对齐；若是 Iplayable 平台需要该额外参数则需修改代码落到日志。
+* 若下游或者 Iplayable 平台需要回传其他不包含在以上参数中的信息，需要 appsflyer 三方平台支持该参数，并且在 postback_pattern 字段的 url 中添加配置该参数。若是下游需要该额外参数则只需与 2.2.1 节配置的 postback_url 对齐，使用相同的宏参；若是 Iplayable 平台需要该额外参数则需修改代码落到日志。
 
 
-#### 3.2.1.2 配置后链路事件回调pattern
+#### 3.2.1.2 配置后链路事件回调 pattern
 
 该项配置的是 upstream 表的 postback_event_pattern 字段，配置**示例：**
 
@@ -258,6 +258,8 @@ http://callback.flatmobi.com/install/appsflyer?click_id={clickid}&event_name={en
 | {erev} | 后链路事件收益，仅支持后链路事件回传 | 否 |
 | {etime} | 后链路事件时间戳，仅支持后链路事件回传 | 否 |
 | {evalue} | 后链路事件value，仅支持后链路事件回传 | 否 |
+
+* 若下游或者 Iplayable 平台需要回传其他不包含在以上参数中的信息，需要 appsflyer 三方平台支持该参数，并且在 postback_event_pattern 字段的 url 中添加配置该参数。若是下游需要该额外参数则只需与 2.2.1 节配置的 event_postback_url 对齐，使用相同的宏参；若是 Iplayable 平台需要该额外参数则需修改代码落到日志。
 
 #### 3.2.1.3 配置 callback
 
