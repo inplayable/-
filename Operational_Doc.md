@@ -53,11 +53,11 @@ http://callback.flatmobi.com/api/v1/click?app_id=1000&offer_id=22&gaid=4716d154-
 
 * 若下游需要添加其他额外参数，与下游沟通后请在 click_pattern 字段配置时添加，并在 postback_url 中添加。例如，下游想在点击跟踪链接中添加 clickid 参数，需要修改以下两处：
 
-1）配置 downstream 表的 click_pattern 字段，修改示例：
+* 1）配置 downstream 表的 click_pattern 字段，添加 clickid={click_id} ，其中 参数名和宏参，修改示例：
 
 http://callback.flatmobi.com/api/v1/click?app_id={app_id}&offer_id={offer_id}&gaid={gaid}&idfa={idfa}&clickid={click_id}
 
-2）配置 postback_url ，具体细节会在 2.2.x 节中说明。
+* 2）配置 postback_url ，具体细节会在 2.2.x 节中说明。
 
 下游同样需要替换
 
